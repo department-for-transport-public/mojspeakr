@@ -12,3 +12,4 @@ remove_rmd_blocks(md_file)
 \description{
 Remove R markdown multiline block elements (package warnings, but also multiline code blocks)
 }
+\keyword{internal}

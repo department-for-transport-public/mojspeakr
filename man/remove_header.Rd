@@ -12,3 +12,4 @@ remove_header(md_file)
 \description{
 Replace R markdown header with title only
 }
+\keyword{internal}

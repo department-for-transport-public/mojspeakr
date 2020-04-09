@@ -17,3 +17,4 @@ reference.}
 \description{
 Convert markdown image references to govspeak format (!!n)
 }
+\keyword{internal}

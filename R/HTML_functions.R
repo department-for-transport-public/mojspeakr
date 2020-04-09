@@ -8,7 +8,7 @@ conditional_publishing_output <- function(publication_type, output){
   if (opts_knit$get("rmarkdown.pandoc.to") == publication_type){output}
 }
 
-#' Compares summary points to vector of words indicating change, and highlights relevant words in bold
+#' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 #' @param data character vector of summary points
 #' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)
 #' @export

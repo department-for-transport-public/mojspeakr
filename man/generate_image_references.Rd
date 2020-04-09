@@ -15,3 +15,4 @@ between (eg, "1-abcd-1.png")}
 Converts image file names to a dataframe, with a field containing the
 original image name and corresponding govdown reference
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ convert_callouts(md_file)
 \description{
 Convert markdown callout sytax to govspeak
 }
+\keyword{internal}

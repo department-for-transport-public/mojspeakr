@@ -7,6 +7,14 @@ Maintainer: Francesca.Bryden <francesca.bryden@justice.gov.uk>
 Description: Allows preparation of HTML releases for publication on gov.uk
     Builds on the govspeakr package, including some formatting changes useful for MoJ publications, particularly where outputting simultaneously in word and HTML formats.
 License: GPL-3
+Imports:
+    stringr
+Suggests:
+    testthat,
+    rmarkdown,
+    knitr,
+    ggplot2,
+    kableExtra
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
