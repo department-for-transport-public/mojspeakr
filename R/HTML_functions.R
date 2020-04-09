@@ -8,6 +8,16 @@ conditional_publishing_output <- function(publication_type, output){
   if (opts_knit$get("rmarkdown.pandoc.to") == publication_type){output}
 }
 
+#' Add images to both HTML and other formats
+#' @param file_name string giving the file name of the image only
+#' @param folder string giving the directory the image is stored in, defaults to "graphs".
+#' @export
+#' @name add_image
+#' @title Highlight in bold key words in summary text
+add_image <- function(file_name, folder = "graphs"){
+  paste0("![](", folder, "/", file_name, ")<!-- -->")
+}
+
 #' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 #' @param data character vector of summary points
 #' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)

@@ -12,5 +12,5 @@ bold_key_words(data, key_words = NULL)
 \item{key_words}{character vector of additional words you would like to highlight in bold (defaults to NULL)}
 }
 \description{
-Compares summary points to vector of words indicating change, and highlights relevant words in bold
+Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 }
