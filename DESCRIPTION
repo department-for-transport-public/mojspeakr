@@ -8,11 +8,11 @@ Description: Allows preparation of HTML releases for publication on gov.uk
     Builds on the govspeakr package, including some formatting changes useful for MoJ publications, particularly where outputting simultaneously in word and HTML formats.
 License: GPL-3
 Imports:
-    stringr
+    stringr,
+    knitr
 Suggests:
     testthat,
     rmarkdown,
-    knitr,
     ggplot2,
     kableExtra
 Encoding: UTF-8

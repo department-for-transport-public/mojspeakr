@@ -1,3 +1,12 @@
+#' Add a table suitable for publication in govspeak and in word/PDF
+#' @param data dataframe you want to display as a table
+#' @export
+#' @name add_table
+#' @title Format data in a table suitable for publication
+add_table <- function(data) {
+  knitr::kable(data, format = "markdown")
+}
+
 #' Conditional display of specified outputs when RMarkdown document is knitted
 #' @param publication_type string describing type of RMarkdown output you would like the output to appear in
 #' @param output object you want to output into document; can be a table, text, graph, or image.
