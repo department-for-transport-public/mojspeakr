@@ -36,7 +36,8 @@ add_image <- function(file_name, folder = "graphs"){
 #' @title Highlight in bold key words in summary text
 bold_key_words <- function(data, key_words = NULL) {
   ##Concatenate chosen key words with pre-existing list
-  key_words <- c(key_words, "decreasing", "increasing", "no change", "decreased", "increased", "down", "up", "stable")
+  key_words <- c(key_words, "decreasing", "decreased", "down", "lower", "fall", "decrease", "fell",
+                 "increasing", "increased", "up", "risen", "increase", "rose", "stable", "no change")
   temp <- data
   for(i in 1:length(key_words)){
     sub_words <- paste0("**", key_words[i], "**")
@@ -45,27 +46,19 @@ bold_key_words <- function(data, key_words = NULL) {
 }
 
 #' Add summary table. Contains arrows indicating direction in word and PDF format, contains only text with key words highlighted in govspeak format.
-#' @param left vector of left column key points
-#' @param middle vector of arrow image calls
-#' @param right vector of right column descriptions of key points
+#' @param left vector of key points which will appear in left column
+#' @param middle vector of arrow image calls which will appear in middle column
+#' @param right vector of descriptions of key points which will appear in right column
+#' @param key_words vector of key words you would like bolded in descriptors of key points
 #' @export
 #' @name add_summary_table
 #' @title Produce summary table for key points in conditional format
-add_summary_table <- function(left, middle, right){
-bold_text <- function(data){
-  bolded <- NULL
-  for(i in 1:length(data))
-  {
-    a <- paste0("**", data[i], "**")
-    bolded <- c(bolded, a)
-  }
-  return(bolded)
-}
+add_summary_table <- function(left, middle, right, key_words = NULL){
 
-left <- bold_text(left)
+  left <- bold_text(left)
 
 if (opts_knit$get("rmarkdown.pandoc.to") == "html"){
-  right_bolded <- bold_key_words(right)
+  right_bolded <- bold_key_words(right, key_words = key_words)
   html_table <- data.frame(left, right_bolded)
   colnames(html_table) <- NULL
   knitr::kable(html_table, format = "markdown")

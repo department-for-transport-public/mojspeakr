@@ -97,3 +97,18 @@ remove_rmd_blocks <- function(md_file) {
   cleaned_md_file <- gsub("```\\n.*?```\\n\\n", "", md_file)
   return(cleaned_md_file)
 }
+
+#' Bold all text in a vector
+#' @param data vector containing strings of interest
+#' @name bold_text
+#' @keywords internal
+#' @title Add RMarkdown annotation to bold all text in a vector
+bold_text <- function(data){
+  bolded <- NULL
+  for(i in 1:length(data))
+  {
+    a <- paste0("**", data[i], "**")
+    bolded <- c(bolded, a)
+  }
+  return(bolded)
+}
