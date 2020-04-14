@@ -4,14 +4,16 @@
 \alias{add_summary_table}
 \title{Produce summary table for key points in conditional format}
 \usage{
-add_summary_table(left, middle, right)
+add_summary_table(left, middle, right, key_words = NULL)
 }
 \arguments{
-\item{left}{vector of left column key points}
+\item{left}{vector of key points which will appear in left column}
 
-\item{middle}{vector of arrow image calls}
+\item{middle}{vector of arrow image calls which will appear in middle column}
 
-\item{right}{vector of right column descriptions of key points}
+\item{right}{vector of descriptions of key points which will appear in right column}
+
+\item{key_words}{vector of key words you would like bolded in descriptors of key points}
 }
 \description{
 Add summary table. Contains arrows indicating direction in word and PDF format, contains only text with key words highlighted in govspeak format.
