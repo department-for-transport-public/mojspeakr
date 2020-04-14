@@ -1,3 +1,20 @@
+#' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
+#' @param data character vector of summary points
+#' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)
+#' @name bold_key_words
+#' @title Highlight in bold key words in summary text
+bold_key_words <- function(data, key_words = NULL) {
+  ##Concatenate chosen key words with pre-existing list
+  key_words <- c(key_words, "decreasing", "decreased", "down", "lower", "fall", "decrease", "fell",
+                 "increasing", "increased", "up", "risen", "increase", "rose", "stable", "no change")
+  temp <- data
+  for(i in 1:length(key_words)){
+    sub_words <- paste0("**", key_words[i], "**")
+    temp <- gsub(key_words[i], sub_words, temp, ignore.case = T)}
+  return(temp)
+}
+
+
 #' Converts image file names to a dataframe, with a field containing the
 #' original image name and corresponding govdown reference
 #' @param img_filenames character vector of files to be referenced in govdown format

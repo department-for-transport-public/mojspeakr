@@ -3,6 +3,5 @@
 export(add_image)
 export(add_summary_table)
 export(add_table)
-export(bold_key_words)
 export(conditional_publishing_output)
 export(convert_rmd)
