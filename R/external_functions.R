@@ -27,6 +27,7 @@ add_image <- function(file_name, folder = "graphs"){
   paste0("![](", folder, "/", file_name, ")<!-- -->")
 }
 
+
 #' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 #' @param data character vector of summary points
 #' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)
@@ -41,6 +42,37 @@ bold_key_words <- function(data, key_words = NULL) {
     sub_words <- paste0("**", key_words[i], "**")
     temp <- gsub(key_words[i], sub_words, temp, ignore.case = T)}
   return(temp)
+}
+
+#' Add summary table. Contains arrows indicating direction in word and PDF format, contains only text with key words highlighted in govspeak format.
+#' @param left vector of left column key points
+#' @param middle vector of arrow image calls
+#' @param right vector of right column descriptions of key points
+#' @export
+#' @name add_summary_table
+#' @title Produce summary table for key points in conditional format
+add_summary_table <- function(left, middle, right){
+bold_text <- function(data){
+  bolded <- NULL
+  for(i in 1:length(data))
+  {
+    a <- paste0("**", data[i], "**")
+    bolded <- c(bolded, a)
+  }
+  return(bolded)
+}
+
+left <- bold_text(left)
+
+if (opts_knit$get("rmarkdown.pandoc.to") == "html"){
+  right_bolded <- bold_key_words(right)
+  html_table <- data.frame(left, right_bolded)
+  colnames(html_table) <- NULL
+  knitr::kable(html_table, format = "markdown")
+} else{
+  normal <- data.frame(left, middle, right)
+  colnames(normal) <- NULL # Remove column titles
+  knitr::kable(normal, format = "markdown")}
 }
 
 #' Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format

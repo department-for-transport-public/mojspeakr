@@ -56,6 +56,8 @@ Figure 1
 
 **add_image()**: Allows simple addition of figures which are not generated within the Rmarkdown document. These must adhere to the Whitehall publishing size of 960 by 720 pixels, and must be saved with a number at the start and end of the filename. 
 
+**add_table()**: Allows simple addition of a table which displays in both govspeak and word formats, and allows for text to go over multiple lines.
+
 **conditional_publishing_output**: Aims to make publishing two formats from one RMarkdown document simple. This wrapper allows any output to be conditional and only appear in one of the specified formats e.g. to output table_one in the HTML output only you can use:
 
 ```
