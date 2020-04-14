@@ -7,7 +7,7 @@ add_table <- function(data) {
   knitr::kable(data, format = "markdown")
 }
 
-#' Include text in a callout box in govspeak only, shows simple text only in other formats. The R header for this chunk needs to contain "results='asis'" to ensure this outputs with correct line breaks.
+#' Include text in a callout box in govspeak only, shows simple text only in other formats.
 #' @param text string you want to publish in a call-out box
 #' @export
 #' @name callout_box
