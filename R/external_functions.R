@@ -7,6 +7,18 @@ add_table <- function(data) {
   knitr::kable(data, format = "markdown")
 }
 
+#' Include text in a callout box in govspeak only, shows simple text only in other formats. The R header for this chunk needs to contain "results='asis'" to ensure this outputs with correct line breaks.
+#' @param text string you want to publish in a call-out box
+#' @export
+#' @name callout_box
+#' @title Include a callout box in govspeak output
+callout_box <- function(text){
+  if(opts_knit$get("rmarkdown.pandoc.to") == "html"){
+    cat(paste("$CTA", text, "$CTA", sep = '\n'))
+  } else{
+    cat(paste(text))}
+}
+
 #' Conditional display of specified outputs when RMarkdown document is knitted
 #' @param publication_type string describing type of RMarkdown output you would like the output to appear in
 #' @param output object you want to output into document; can be a table, text, graph, or image.
@@ -79,15 +91,14 @@ convert_rmd <- function(path,
 
   govspeak_file <- convert_callouts(govspeak_file)
 
-    if (remove_blocks) {
-    govspeak_file <- remove_rmd_blocks(govspeak_file)
-    }
-
   ##Remove long strings of hashes and move all headers down one level
   govspeak_file <- gsub("#####", "-----", govspeak_file)
   govspeak_file <- gsub('#(?=[A-Z])', '\\1# ', govspeak_file, perl=T)
   govspeak_file <- gsub('# (?=[A-Z])', '\\1## ', govspeak_file, perl=T)
 
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
+  if (remove_blocks) {
+    govspeak_file <- remove_rmd_blocks(govspeak_file)
+  }
 }
 
