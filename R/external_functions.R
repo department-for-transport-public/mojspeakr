@@ -79,14 +79,14 @@ convert_rmd <- function(path,
 
   govspeak_file <- convert_callouts(govspeak_file)
 
+    if (remove_blocks) {
+    govspeak_file <- remove_rmd_blocks(govspeak_file)
+    }
+
   ##Remove long strings of hashes and move all headers down one level
   govspeak_file <- gsub("#####", "-----", govspeak_file)
   govspeak_file <- gsub('#(?=[A-Z])', '\\1# ', govspeak_file, perl=T)
   govspeak_file <- gsub('# (?=[A-Z])', '\\1## ', govspeak_file, perl=T)
-
-  if (remove_blocks) {
-    govspeak_file <- remove_rmd_blocks(govspeak_file)
-  }
 
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
 }
