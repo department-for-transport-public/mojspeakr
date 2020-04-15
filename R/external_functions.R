@@ -69,12 +69,15 @@ if (opts_knit$get("rmarkdown.pandoc.to") == "html"){
 #'   to "graphs"
 #' @param remove_blocks bool; decision to remove block elements from *.md file.
 #'   This includes code blocks and warnings
+#' @param sub_pattern bool or vector; decision to increase hashed headers by one level in *.md file.
+#'   TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows selectivity.
 #' @export
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
 convert_rmd <- function(path,
                         images_folder = "graphs",
-                        remove_blocks=FALSE
+                        remove_blocks=FALSE,
+                        sub_pattern = TRUE
 ) {
   md_file <- paste(readLines(path), collapse = "\n")
 
@@ -93,8 +96,8 @@ convert_rmd <- function(path,
 
   ##Remove long strings of hashes/page break indicators and move all headers down one level
   govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
-  govspeak_file <- gsub('#(?=[A-Z])', '\\1# ', govspeak_file, perl=T)
-  govspeak_file <- gsub('# (?=[A-Z])', '\\1## ', govspeak_file, perl=T)
+  govspeak_file <- hash_sub(govspeak_file, sub_type = sub_pattern)
+  govspeak_file
 
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
   if (remove_blocks) {

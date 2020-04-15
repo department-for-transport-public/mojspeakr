@@ -4,7 +4,12 @@
 \alias{convert_rmd}
 \title{Convert standard markdown file to govspeak}
 \usage{
-convert_rmd(path, images_folder = "graphs", remove_blocks = FALSE)
+convert_rmd(
+  path,
+  images_folder = "graphs",
+  remove_blocks = FALSE,
+  sub_pattern = TRUE
+)
 }
 \arguments{
 \item{path}{string; filename (including path) to *.md file for conversion}
@@ -14,6 +19,9 @@ to "graphs"}
 
 \item{remove_blocks}{bool; decision to remove block elements from *.md file.
 This includes code blocks and warnings}
+
+\item{sub_pattern}{bool or vector; decision to increase hashed headers by one level in *.md file.
+TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows selectivity.}
 }
 \description{
 Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format
