@@ -91,8 +91,8 @@ convert_rmd <- function(path,
 
   govspeak_file <- convert_callouts(govspeak_file)
 
-  ##Remove long strings of hashes and move all headers down one level
-  govspeak_file <- gsub("#####", "-----", govspeak_file)
+  ##Remove long strings of hashes/page break indicators and move all headers down one level
+  govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
   govspeak_file <- gsub('#(?=[A-Z])', '\\1# ', govspeak_file, perl=T)
   govspeak_file <- gsub('# (?=[A-Z])', '\\1## ', govspeak_file, perl=T)
 
