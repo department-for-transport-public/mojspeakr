@@ -129,3 +129,24 @@ bold_text <- function(data){
   }
   return(bolded)
 }
+
+#' Substitute hashed Rmarkdown headers with the next level down down e.g. # to ##
+#' @param data object to substitute
+#' @param sub_type logical or vector, TRUE will substitute all heading levels, FALSE will substitute none, alternatively a vector will allow you to select specific levels of vector.
+#' @name hash_sub
+#' @keywords internal
+#' @title Increase Rmarkdown headers by one level
+hash_sub <- function(data, sub_type){
+  if(TRUE %in% sub_type){
+    gsub("# ", "## ", data)
+  }else if(FALSE %in% sub_type){
+    data }
+  else{
+    sub_type <- sub_type[(order(stringi::stri_length(sub_type), decreasing = T))]
+    data_final <- data
+     for(i in 1:length(sub_type)){
+      sub_type1 <- paste0("\n", sub_type[i], " ")
+      replacement <- gsub("# ", "## ", sub_type1)
+      data_final <- gsub(sub_type1, replacement, data_final)}
+    return(data_final)}
+    }

@@ -38,7 +38,8 @@ install_github("moj-analytical-services/mojspeakr")
 
 ## Functions
 
-**convert_rmd()**: Following rendering of the output, this function modifies formatting of the .md file to produce a govspeak output which can be read by Whitehall Publishing:
+### convert_rmd() 
+Following rendering of the output, this function modifies formatting of the .md file to produce a govspeak output which can be read by Whitehall Publishing:
 
 * Image tags are converted from standard markdown to govspeak i.e.
 ```
@@ -55,19 +56,37 @@ Figure 1
 
 * As GOV.UK cannot accept first-level headers (single #), all hashed headers are increased by one level i.e.
 ``` # Title ``` becomes ```## Title```
+This functionality can be controlled using the sub_pattern argument. Setting it to TRUE increases all headers by one level. FALSE results in no changes to the headers as written. Passing the argument a vector allows selective changing of specific headers, e.g. ```sub_pattern = c("#", "##")``` would change only first and second level headers.
 
-**add_image()**: Allows simple addition of figures which are not generated within the Rmarkdown document. These must adhere to the Whitehall publishing size of 960 by 720 pixels, and must be saved with a number at the start and end of the filename. 
+### add_image() 
+Allows simple addition of figures which are not generated within the Rmarkdown document. These must adhere to the Whitehall publishing size of 960 by 720 pixels, and must be saved with a sequential number at the start and end of the filename. For example, an image which will become the third image in the completed document could be called ```03-image-1.png```.
 
-**add_table()**: Formatting of a table to display in both govspeak and word formats, and allows for text to go over multiple lines.
+### add_table() 
+Formats a dataframe of data into a table. This will display correctly in both govspeak and word formats, and allows for text to go over multiple lines.
 
-**conditional_publishing_output()**: Aims to make publishing two formats from one RMarkdown document simple. This wrapper allows any output to be conditional and only appear in one of the specified formats e.g. to output table_one in the HTML output only you can use:
+### conditional_publishing_output()
+Aims to make publishing two formats from one RMarkdown document simple. This wrapper allows any output to be conditional and only appear in one of the specified formats e.g. to output table_one in the HTML output only you can use:
 
 ```
 conditional_publishing_output("html", table_one)
 ```
-**add_summary_table()**: MoJ stats summary tables consist of three columns, one of which contains directional arrow images which are not compatible with publication through the Whitehall platform. Instead a 2-column table which omits these images and highlights key directional phrases and words is used instead. This function takes three vectors and conditionally produces either the two- or three- column table depending on the output type.
+This output will not appear at all in any non-HTML outputs such as word or pdf.
 
-**callout_box()**: Some publications use a callout box to add emphasis to text in an online publication via $CTA tags. This function automatically adds these $CTA tags to text in the govspeakr output only. Any Rmarkdown code chunk using this function must include 
+The full list of options that can be used in the first argument are:
+
+* **"html"** for HTML/govspeak output
+* **"docx"** for Word output
+* **"latex"** for PDF output
+* **"markdown_strict"** for markdown output
+* **"pptx"** for powerpoint presentation
+* **"beamer"** for beamer presentation
+* **"odt"** for odt output
+
+### add_summary_table() 
+MoJ stats summary tables consist of three columns, one of which contains directional arrow images which are not compatible with publication through the Whitehall platform. Instead a 2-column table which omits these images and highlights key directional phrases and words is used. This function takes three vectors and conditionally produces either the two- or three- column table depending on the output type. A two-column table is produced in the govspeak output, and a three-column table is produced in all other output types.
+
+### callout_box() 
+Some publications use a callout box to add emphasis to text in an online publication via $CTA tags. This function automatically adds these $CTA tags to text in the govspeakr output only. Any Rmarkdown code chunk using this function must include 
 ```
 {r "results='asis'"}
 ```

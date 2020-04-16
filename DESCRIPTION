@@ -9,6 +9,7 @@ Description: Allows preparation of HTML releases for publication on gov.uk
 License: GPL-3
 Imports:
     stringr,
+    stringi,
     knitr
 Suggests:
     testthat,
