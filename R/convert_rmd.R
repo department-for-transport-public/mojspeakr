@@ -15,6 +15,21 @@ convert_rmd <- function(path,
                         remove_blocks=FALSE,
                         sub_pattern = TRUE
 ) {
+
+  ##Check listed directory exists
+  if (dir.exists(images_folder)==F) {
+    stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
+  }
+
+  ##Check that files end with numeric values
+  files <- list.files(images_folder)
+  files <- sub("\\..*", "", files)
+  file_check <- mean(!is.na(as.numeric(stringi::stri_sub(files, -1))))
+  if(file_check != 1){
+    stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
+
+  }
+
   md_file <- paste(readLines(path), collapse = "\n")
 
   img_files <- list.files(paste0(dirname(path),
