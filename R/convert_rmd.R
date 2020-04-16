@@ -24,7 +24,7 @@ convert_rmd <- function(path,
   ##Check that files end with numeric values
   files <- list.files(images_folder)
   files <- sub("\\..*", "", files)
-  file_check <- mean(!is.na(as.numeric(stringi::stri_sub(files, -1))))
+  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(files, -1)))))
   if(file_check != 1){
     stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
 
