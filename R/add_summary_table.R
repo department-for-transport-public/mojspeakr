@@ -13,7 +13,7 @@ add_summary_table <- function(left, middle, right, key_words = NULL){
 
   left <- bold_text(left)
 
-  if (opts_knit$get("rmarkdown.pandoc.to") == "html"){
+  if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "html"){
     right_bolded <- bold_key_words(right, key_words = key_words)
     html_table <- data.frame(left, right_bolded)
     colnames(html_table) <- NULL
