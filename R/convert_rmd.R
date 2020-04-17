@@ -49,7 +49,7 @@ convert_rmd <- function(path,
 
   govspeak_file <- convert_callouts(govspeak_file)
 
-  ##Remove long strings of hashes/page break indicators and move all headers down one level
+  #Remove long strings of hashes/page break indicators and move all headers down one level
   if(page_break == "line"){
     govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
   }else if(page_break == "none"){
@@ -58,7 +58,6 @@ convert_rmd <- function(path,
     govspeak_file <- govspeak_file
   }
   govspeak_file <- hash_sub(govspeak_file, sub_type = sub_pattern)
-  govspeak_file
 
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
   if (remove_blocks) {
