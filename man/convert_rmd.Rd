@@ -8,7 +8,8 @@ convert_rmd(
   path,
   images_folder = "graphs",
   remove_blocks = FALSE,
-  sub_pattern = TRUE
+  sub_pattern = TRUE,
+  page_break = "line"
 )
 }
 \arguments{
@@ -23,6 +24,10 @@ This includes code blocks and warnings}
 \item{sub_pattern}{bool or vector; decision to increase hashed headers by one level in *.md file.
 TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows individual headings to be modified as required.
 e.g. "#" will modify only first level headers.}
+
+\item{page_break}{string; chooses what page breaks are converted to on Whitehall.
+If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
+If "unchanged" they are not removed.}
 }
 \description{
 Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format
