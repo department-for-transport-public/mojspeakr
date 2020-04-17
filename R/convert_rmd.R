@@ -7,13 +7,17 @@
 #' @param sub_pattern bool or vector; decision to increase hashed headers by one level in *.md file.
 #'   TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows individual headings to be modified as required.
 #'   e.g. "#" will modify only first level headers.
+#' @param page_break string; chooses what page breaks are converted to on Whitehall.
+#' If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
+#' If "unchanged" they are not removed.
 #' @export
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
 convert_rmd <- function(path,
                         images_folder = "graphs",
                         remove_blocks=FALSE,
-                        sub_pattern = TRUE
+                        sub_pattern = TRUE,
+                        page_break = "line"
 ) {
 
   ##Check listed directory exists
@@ -46,7 +50,13 @@ convert_rmd <- function(path,
   govspeak_file <- convert_callouts(govspeak_file)
 
   ##Remove long strings of hashes/page break indicators and move all headers down one level
-  govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
+  if(page_break == "line"){
+    govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
+  }else if(page_break == "none"){
+    govspeak_file <- gsub("#####|##### <!-- Page break -->", "\n", govspeak_file)
+  }else if(page_break == "unchanged"){
+    govspeak_file <- govspeak_file
+  }
   govspeak_file <- hash_sub(govspeak_file, sub_type = sub_pattern)
   govspeak_file
 
