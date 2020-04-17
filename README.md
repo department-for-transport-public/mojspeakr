@@ -56,7 +56,7 @@ Figure 1
 !!1
 ```
 
-* Page breaks are replaced with horizontal rulings
+* Page breaks are replaced. This feature can be controlled using the "page_break" argument. ```page_break = "line"``` replaces them with a horizontal ruling, while ```page_break = "none"``` just moves the subsequent text onto a new line, and ```page_break = "unchanged"``` makes no replacement.
 
 * YAML header is removed
 
