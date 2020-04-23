@@ -9,8 +9,9 @@ bold_key_words <- function(data, key_words = NULL) {
                  "increasing", "increased", "up", "risen", "increase", "rose", "stable", "no change")
   temp <- data
   for(i in 1:length(key_words)){
-    sub_words <- paste0("**", key_words[i], "**")
-    temp <- gsub(key_words[i], sub_words, temp, ignore.case = T)}
+    sub_words <- paste0(" **", key_words[i], "** ")
+    search_words <- paste0(" ", key_words[i], " ")
+    temp <- gsub(search_words, sub_words, temp, ignore.case = T)}
   return(temp)
 }
 
