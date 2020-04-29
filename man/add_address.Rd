@@ -7,7 +7,7 @@
 add_address(text)
 }
 \arguments{
-\item{text}{address as a string}
+\item{text}{address as a string, with each new line separated with a comma}
 }
 \description{
 Adds conditional address tags in govspeak only. Displays as formatted text in govspeak, and as simple text only in other formats.

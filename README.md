@@ -98,3 +98,19 @@ Some publications use a callout box to add emphasis to text in an online publica
 ```
 in the chunk options.
 
+### add_email() 
+Email addresses should appear as links in the govspeakr output only, and as plain text in all other formats. This function conditionally adds "<>" bracketing email addresses in the govspeakr output only. It can be used in inline code in Rmarkdown e.g. 
+```
+Email: `r add_email(test@email.com)`
+```
+
+### add_address()
+Postal addresses should appear as formatted text in govspeakr output only, and as plain text in all other formats. This function conditionally adds "$A" bracketing addresses in the govspeakr output only, and also ensures that each part of the address is displayed on a new line in both outputs. It accepts addresses as a single string, with each line separated by a comma e.g.
+```
+add_address("123 Fake Street, Leeds, LS1 2DA")
+```
+Any Rmarkdown code chunk using this function must include 
+```
+{r "results='asis'"}
+```
+in the chunk options.
