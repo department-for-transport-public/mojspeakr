@@ -94,7 +94,7 @@ MoJ stats summary tables consist of three columns, one of which contains directi
 ### callout_box() 
 Some publications use a callout box to add emphasis to text in an online publication via $CTA tags. This function automatically adds these $CTA tags to text in the govspeakr output only. Any Rmarkdown code chunk using this function must include 
 ```
-{r "results='asis'"}
+{r results='asis'}
 ```
 in the chunk options.
 
@@ -111,6 +111,6 @@ add_address("123 Fake Street, Leeds, LS1 2DA")
 ```
 Any Rmarkdown code chunk using this function must include 
 ```
-{r "results='asis'"}
+{r results='asis'}
 ```
 in the chunk options.
