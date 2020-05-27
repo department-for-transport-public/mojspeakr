@@ -4,10 +4,12 @@
 \alias{add_address}
 \title{Include a formatted address in govspeak output}
 \usage{
-add_address(text)
+add_address(text, unmodified = F)
 }
 \arguments{
 \item{text}{address as a string, with each new line separated with a comma}
+
+\item{unmodified}{logical value. If true, address formatting will not be changed in any formats other than HTML. If false, address will be formatted to include linebreaks in all outputs.}
 }
 \description{
 Adds conditional address tags in govspeak only. Displays as formatted text in govspeak, and as simple text only in other formats.
