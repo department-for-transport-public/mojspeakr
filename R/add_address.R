@@ -12,7 +12,7 @@ add_address <- function(text, unmodified = F){
     text <- gsub(",", "  \n", text)
     cat(paste(text))
   } else if(unmodified == T){
-    paste(text)
+    cat(paste(text))
   }
 
 }
