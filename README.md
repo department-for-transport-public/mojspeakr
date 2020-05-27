@@ -105,7 +105,11 @@ Email: `r add_email(test@email.com)`
 ```
 
 ### add_address()
-Postal addresses should appear as formatted text in govspeakr output only, and as plain text in all other formats. This function conditionally adds "$A" bracketing addresses in the govspeakr output only, and also ensures that each part of the address is displayed on a new line in both outputs. It accepts addresses as a single string, with each line separated by a comma e.g.
+Postal addresses should appear as formatted text in govspeakr output only, and as plain text in all other formats. This function conditionally adds "$A" bracketing addresses in the govspeakr output only, and as a default also ensures that each part of the address is displayed on a new line in both outputs. 
+
+If you would like addresses to appear unformatted in all other formats, please add a call of "unmodified = T" to this function. 
+
+It accepts addresses as a single string, with each line separated by a comma e.g.
 ```
 add_address("123 Fake Street, Leeds, LS1 2DA")
 ```
