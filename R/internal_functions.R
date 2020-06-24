@@ -100,7 +100,7 @@ convert_callouts <- function(md_file) {
 remove_header <- function(md_file) {
   # Lazy match on header to extract title
   # Remove substitution if titles must be entered manually
-  cleaned_md_file <- gsub("---\\n.*?---\\n", "", md_file)
+  cleaned_md_file <- gsub("---\\n\\s*.*?\\s*output\\s*.*?\\s*---\\n", "", md_file)
   return(cleaned_md_file)
 }
 
