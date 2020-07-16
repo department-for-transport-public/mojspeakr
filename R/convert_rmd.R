@@ -25,6 +25,8 @@ convert_rmd <- function(path,
     stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
   }
 
+  ##Check if images file actually has any images in it, if not then skip image processing
+  if(length(list.files(images_folder)) != 0){
   ##Check that files end with numeric values
   files <- list.files(images_folder)
   files <- sub("\\..*", "", files)
@@ -33,6 +35,7 @@ convert_rmd <- function(path,
     stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
 
   }
+
 
   md_file <- paste(readLines(path), collapse = "\n")
 
@@ -44,6 +47,9 @@ convert_rmd <- function(path,
   govspeak_file <- convert_image_references(image_references,
                                             md_file,
                                             images_folder)
+  } else{
+    md_file <- paste(readLines(path), collapse = "\n")
+    govspeak_file <- as.character(md_file)}
 
   govspeak_file <- remove_header(govspeak_file)
 
