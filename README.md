@@ -65,7 +65,7 @@ Figure 1
 This functionality can be controlled using the sub_pattern argument. Setting it to TRUE increases all headers by one level. FALSE results in no changes to the headers as written. Passing the argument a vector allows selective changing of specific headers, e.g. ```sub_pattern = c("#", "##")``` would change only first and second level headers.
 
 ### add_image() 
-Allows simple addition of figures which are not generated within the Rmarkdown document. These must adhere to the Whitehall publishing size of 960 by 720 pixels, and must be saved with a sequential number at the start and end of the filename. For example, an image which will become the third image in the completed document could be called ```03-image-1.png```.
+Allows simple addition of figures which are not generated within the Rmarkdown document. These must adhere to the Whitehall publishing size of 960 by 640 pixels, and must be saved with a sequential number at the start and end of the filename. For example, an image which will become the third image in the completed document could be called ```03-image-1.png```.
 
 ### add_table() 
 Formats a dataframe of data into a table. This will display correctly in both govspeak and word formats, and allows for text to go over multiple lines.
