@@ -11,7 +11,11 @@ bold_key_words <- function(data, key_words = NULL) {
   for(i in 1:length(key_words)){
     sub_words <- paste0(" **", key_words[i], "** ")
     search_words <- paste0(" ", key_words[i], " ")
-    temp <- gsub(search_words, sub_words, temp, ignore.case = T)}
+    bracket_sub_words <- paste0("\\(**", key_words[i], "** ")
+    bracket_search_words <- paste0("\\(", key_words[i], " ")
+    temp <- gsub(search_words, sub_words, temp, ignore.case = T)
+    temp <- gsub(bracket_search_words, bracket_sub_words, temp, ignore.case = T)
+    }
   return(temp)
 }
 
