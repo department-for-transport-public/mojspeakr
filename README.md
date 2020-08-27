@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build status](https://travis-ci.com/moj-analytical-services/mojspeakr.svg?branch=master)](https://travis-ci.com/github/moj-analytical-services/mojspeakr)
+[![Travis build status](https://travis-ci.com/moj-analytical-services/mojspeakr.svg?branch=development)](https://travis-ci.com/github/moj-analytical-services/mojspeakr)
 <!-- badges: end -->
 
 {mojspeakr} is a package designed to convert an Rmarkdown file into a formatted govspeak file suitable for publishing through which can be uploaded to the Whitehall publisher on ([GOV.UK](https://www.gov.uk)). It was inspired by the ([govspeakr](https://github.com/best-practice-and-impact/govspeakr)) package to  address specific challenges in MoJ statistical releases. In particular, it allows easy RAP output in both govspeak and word/PDF format from one RMarkdown file. This is particularly useful when you want to publish in both accessible and traditional PDF formats, or when you want to carry out QA of the govspeak publication.
