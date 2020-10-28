@@ -5,7 +5,7 @@
 #' @name add_address
 #' @title Include a formatted address in govspeak output
 add_address <- function(text, unmodified = F){
-  if(knitr::opts_knit$get("rmarkdown.pandoc.to") == "html"){
+  if(knitr::opts_knit$get("rmarkdown.pandoc.to") %in% c("html", "markdown_strict")){
     text <- gsub(",", " \n", text)
     cat(paste("$A", text, "$A", sep = '\n'))
   } else if(unmodified == F){
