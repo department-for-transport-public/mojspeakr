@@ -4,10 +4,12 @@
 \alias{add_email}
 \title{Include an email address as a link}
 \usage{
-add_email(text)
+add_email(text, format = "html")
 }
 \arguments{
 \item{text}{email address as string}
+
+\item{format}{string which identifies the outputs you would like the email tags to appear in. Set to HTML as default.}
 }
 \description{
 Adds linked email address in govspeak only. Displays as a link in govspeak, and as simple text only in other formats.

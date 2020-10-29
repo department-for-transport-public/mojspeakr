@@ -4,7 +4,7 @@
 \alias{add_summary_table}
 \title{Produce summary table for key points in conditional format}
 \usage{
-add_summary_table(left, middle, right, key_words = NULL)
+add_summary_table(left, middle, right, key_words = NULL, format = "html")
 }
 \arguments{
 \item{left}{vector of key points which will appear in left column}
@@ -14,6 +14,8 @@ add_summary_table(left, middle, right, key_words = NULL)
 \item{right}{vector of descriptions of key points which will appear in right column}
 
 \item{key_words}{vector of key change words to highlight in right column. A preloaded vector of these key words is already included, but additional words can be added as desired.}
+
+\item{format}{string which identifies the outputs you would like three-column table to appear in. Set to HTML as default.}
 }
 \description{
 Add summary table containing key points of statistical release.
