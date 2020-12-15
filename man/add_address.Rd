@@ -4,10 +4,12 @@
 \alias{add_address}
 \title{Include a formatted address in govspeak output}
 \usage{
-add_address(text, unmodified = F)
+add_address(text, format = "html", unmodified = FALSE)
 }
 \arguments{
 \item{text}{address as a string, with each new line separated with a comma}
+
+\item{format}{string which identifies the outputs you would like the address tags to appear in. Set to HTML as default.}
 
 \item{unmodified}{logical value. If true, address formatting will not be changed in any formats other than HTML. If false, address will be formatted to include linebreaks in all outputs.}
 }
