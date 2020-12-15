@@ -118,3 +118,22 @@ Any Rmarkdown code chunk using this function must include
 {r results='asis'}
 ```
 in the chunk options.
+
+## Pre-release functions
+The package also contains several functions which are relevant to HTML pre-releases only, to mimic the appearance of gov.uk. It is not necessary to use these headers on gov.uk.
+
+### add_logo()
+Adds a logo (e.g. MoJ logo) to the top of the HTML release, as per gov.uk. 
+
+Any Rmarkdown code chunk using this function must include 
+```
+{r results='asis'}
+```
+
+### add_blue_header()
+Includes details of the statistical publication in a blue header, mimicking the appearance of gov.uk. 
+
+Any Rmarkdown code chunk using this function must include 
+```
+{r results='asis'}
+```
