@@ -26,7 +26,7 @@ convert_rmd <- function(path,
     md_file <- paste(readLines(path), collapse = "\n")
     govspeak_file <- as.character(md_file)
     ##Check listed directory exists
-  }else if (dir.exists(images_folder) == F) {
+  } else if (dir.exists(images_folder) == F) {
 
     stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
 
