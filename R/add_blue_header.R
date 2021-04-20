@@ -2,7 +2,7 @@
 #' This should be done for the pre-release only, and not for the final statistics publication
 #' @param header_text a string, containing the title of the pre-release to include in the header text
 #' @param stats_status a string, designating the statistics status of the pre-release. Defaults to "National Statistics", but can be Official or Experimental statistics
-#' @param pre-release_note a string, containing  a pre-release note that will appear underneath the title in the header text. Defaults to "Pre-release".
+#' @param pre_release_note a string, containing  a pre-release note that will appear underneath the title in the header text. Defaults to "Pre-release".
 #' @export
 #' @name add_blue_header
 #' @title Add the blue header bar at the top of a HTML pre-release
