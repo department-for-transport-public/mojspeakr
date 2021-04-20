@@ -1,20 +1,12 @@
 #' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 #' @param data character vector of summary points
 #' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)
-#' @param key_words character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)
 #' @name bold_key_words
 #' @title Highlight in bold key words in summary text
-bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
+bold_key_words <- function(data, key_words = NULL) {
   ##Concatenate chosen key words with pre-existing list
   key_words <- c(key_words, "decreasing", "decreased", "down", "lower", "fall", "decrease", "fell",
                  "increasing", "increased", "up", "risen", "increase", "rose", "stable", "no change")
-
-  #If key words to remove is not NULL, remove listed words from key_words
-  if(!is.null(key_words_remove)){
-    key_words <-  key_words[!(key_words %in% key_words_remove)]
-  }
-
-
   temp <- data
   for(i in 1:length(key_words)){
     sub_words <- paste0(" **", key_words[i], "** ")
