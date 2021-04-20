@@ -20,13 +20,13 @@ convert_rmd <- function(path,
                         page_break = "line"
 ) {
 
-  ##Check listed directory exists
-  if (dir.exists(images_folder)==F) {
+  ##Check listed directory exists, and is not set to NULL (when no images file exists)
+  if (!is.null(images_folder) & dir.exists(images_folder)==F) {
     stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
   }
 
   ##Check if images file actually has any images in it, if not then skip image processing
-  if(length(list.files(images_folder)) != 0){
+  if(!is.null(images_folder)){
   ##Check that files end with numeric values
   files <- list.files(images_folder)
   files <- sub("\\..*", "", files)
