@@ -2,13 +2,14 @@
 #' This should be done for the pre-release only, and not for the final statistics publication
 #' @param header_text a string, containing the title of the pre-release to include in the header text
 #' @param stats_status a string, designating the statistics status of the pre-release. Defaults to "National Statistics", but can be Official or Experimental statistics
+#' @param pre-release_note a string, containing  a pre-release note that will appear underneath the title in the header text. Defaults to "Pre-release".
 #' @export
 #' @name add_blue_header
 #' @title Add the blue header bar at the top of a HTML pre-release
 
-add_blue_header <- function(header_text, stats_status = "National Statistics"){
+add_blue_header <- function(header_text, stats_status = "National Statistics", pre_release_note = "Pre-release" ){
   conditional_publishing_output(output =
-                                             cat("<br>
+                                  cat("<br>
 <style>
 div.blue { background-color:#1D70B8; border-radius: 5px; padding: 20px;}
 </style>
@@ -19,8 +20,8 @@ div.blue { background-color:#1D70B8; border-radius: 5px; padding: 20px;}
 <h1>
 <span style='color: white; font-family: Arial; font-size: 50px; font-weight: bold;'>", header_text, "</span>
 </h1>",
-                                                 "<h3>
-<span style='color: white; font-family: Arial; font-weight: normal;'>Pre-release</span>
+                                      "<h3>
+<span style='color: white; font-family: Arial; font-weight: bold;'>", pre_release_note, "</span>
 </h3>
 </div>
 <br>
