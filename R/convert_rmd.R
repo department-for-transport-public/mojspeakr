@@ -20,13 +20,18 @@ convert_rmd <- function(path,
                         page_break = "line"
 ) {
 
-  ##Check listed directory exists
-  if (dir.exists(images_folder)==F) {
-    stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
-  }
+  ##If a null images directory is specified, skip image processing
+  if(is.null(images_folder)){
 
-  ##Check if images file actually has any images in it, if not then skip image processing
-  if(length(list.files(images_folder)) != 0){
+    md_file <- paste(readLines(path), collapse = "\n")
+    govspeak_file <- as.character(md_file)
+    ##Check listed directory exists
+  } else if (dir.exists(images_folder) == F) {
+
+    stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
+
+    } else{
+
   ##Check that files end with numeric values
   files <- list.files(images_folder)
   files <- sub("\\..*", "", files)
@@ -47,9 +52,7 @@ convert_rmd <- function(path,
   govspeak_file <- convert_image_references(image_references,
                                             md_file,
                                             images_folder)
-  } else{
-    md_file <- paste(readLines(path), collapse = "\n")
-    govspeak_file <- as.character(md_file)}
+  }
 
   govspeak_file <- remove_header(govspeak_file)
 
@@ -63,9 +66,14 @@ convert_rmd <- function(path,
   }else if(page_break == "unchanged"){
     govspeak_file <- govspeak_file
   }
+
+  ##Substitute hashes according to pattern
   govspeak_file <- hash_sub(govspeak_file, sub_type = sub_pattern)
 
+  ##Write output as converted file
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
+
+  ##Remove YAML block if requested
   if (remove_blocks) {
     govspeak_file <- remove_rmd_blocks(govspeak_file)
   }
