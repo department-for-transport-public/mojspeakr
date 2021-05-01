@@ -5,8 +5,15 @@
 #' @name add_logo
 #' @title Add a logo to the top of a HTML pre-release
 add_logo <- function(img){
+  ##If format of chunk is not set to "asis", return a warning
+  if(opts_current$get("results") != "asis"){
+    warning("Chunk option must be set to result = 'asis'")
+  }
+
   conditional_publishing_output(
-    output = cat("[<img src='", img, "'  width='120' height='120'>](https://www.gov.uk/government/organisations/ministry-of-justice)", sep = ""),
+    output = cat("[<img src='",
+                 img,
+                 "'  width='120' height='120'>](https://www.gov.uk/government/organisations/ministry-of-justice)", sep = ""),
     publication_type = "html")
 }
 

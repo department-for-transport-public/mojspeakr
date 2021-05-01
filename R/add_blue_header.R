@@ -8,6 +8,12 @@
 #' @title Add the blue header bar at the top of a HTML pre-release
 
 add_blue_header <- function(header_text, stats_status = "National Statistics", pre_release_note = "Pre-release" ){
+
+  ##If format of chunk is not set to "asis", return a warning
+  if(opts_current$get("results") != "asis"){
+    warning("Chunk option must be set to result = 'asis'")
+  }
+
   conditional_publishing_output(output =
                                   cat("<br>
 <style>
