@@ -6,7 +6,7 @@
 #' @param middle vector of arrow image calls which will appear in middle column
 #' @param right vector of descriptions of key points which will appear in right column
 #' @param key_words vector of key change words to highlight in right column. A preloaded vector of these key words is already included, but additional words can be added as desired.
-#' @param key_words character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)
+#' @param key_words_remove character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)
 #' @param format string which identifies the outputs you would like three-column table to appear in. Set to HTML as default.
 #' @export
 #' @name add_summary_table
