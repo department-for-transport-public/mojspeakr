@@ -4,22 +4,31 @@
 \alias{add_summary_table}
 \title{Produce summary table for key points in conditional format}
 \usage{
-add_summary_table(left, middle, right, key_words = NULL, format = "html")
+add_summary_table(
+  left,
+  middle = "",
+  right,
+  key_words = NULL,
+  key_words_remove = NULL,
+  format = "html"
+)
 }
 \arguments{
 \item{left}{vector of key points which will appear in left column}
 
-\item{middle}{vector of arrow image calls which will appear in middle column}
+\item{middle}{optional vector of arrow image calls which will appear in middle column. If not specified, a blank column will be included instead.}
 
 \item{right}{vector of descriptions of key points which will appear in right column}
 
 \item{key_words}{vector of key change words to highlight in right column. A preloaded vector of these key words is already included, but additional words can be added as desired.}
+
+\item{key_words_remove}{character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)}
 
 \item{format}{string which identifies the outputs you would like three-column table to appear in. Set to HTML as default.}
 }
 \description{
 Add summary table containing key points of statistical release.
 Traditionally these consist of key points, images of arrows to indicate direction of change, and detailed description of the key points.
-This normal structure is outputted in word and pdf formats, while the govspeak format includes only the two text columns.
+This normal structure is produced in word and pdf formats, while the govspeak format includes only the two text columns.
 The govspeak format also highlights key words indicating direction of change in the description.
 }

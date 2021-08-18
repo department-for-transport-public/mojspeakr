@@ -1,7 +1,7 @@
 #' Compares summary points to vector of words indicating change, and highlights relevant words in bold.
 #' @param data character vector of summary points
 #' @param key_words character vector of additional words you would like to highlight in bold (defaults to NULL)
-#' @param key_words character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)
+#' @param key_words_remove character vector of standard key words you would NOT like to highlight in bold (defaults to NULL)
 #' @name bold_key_words
 #' @title Highlight in bold key words in summary text
 bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
