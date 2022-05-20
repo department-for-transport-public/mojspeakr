@@ -42,13 +42,14 @@ convert_rmd <- function(path,
   if(img_type == "all"){
     files <- list.files(images_folder)
   } else if(img_type == "images"){
-    files <- list.files(images_folder, path = "[.](svg|png)")
+    files <- list.files(images_folder, pattern = "[.](svg|png)")
   } else{
-    files <- list.files(images_folder, path = paste0("[.]", img_type))
+    files <- list.files(images_folder, pattern = paste0("[.]", img_type))
   }
 
   files <- sub("\\..*", "", files)
   file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(files, -1)))))
+
   if(file_check != 1){
     stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
 
