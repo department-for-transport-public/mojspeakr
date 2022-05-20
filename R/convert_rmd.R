@@ -41,14 +41,15 @@ convert_rmd <- function(path,
   ##Only search image files; allow users to select which ones they want to check
   if(img_type == "all"){
     files <- list.files(images_folder)
+
   } else if(img_type == "images"){
     files <- list.files(images_folder, pattern = "[.](svg|png)")
   } else{
     files <- list.files(images_folder, pattern = paste0("[.]", img_type))
   }
 
-  files <- sub("\\..*", "", files)
-  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(files, -1)))))
+  file_check <- sub("\\..*", "", files)
+  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(file_check, -1)))))
 
   if(file_check != 1){
     stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
@@ -58,9 +59,7 @@ convert_rmd <- function(path,
 
   md_file <- paste(readLines(path), collapse = "\n")
 
-  img_files <- list.files(paste0(dirname(path),
-                                 "/",
-                                 images_folder))
+  img_files <- files
 
   image_references <- generate_image_references(img_files)
   govspeak_file <- convert_image_references(image_references,
