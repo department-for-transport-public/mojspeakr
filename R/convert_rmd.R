@@ -10,6 +10,10 @@
 #' @param page_break string; chooses what page breaks are converted to on Whitehall.
 #' If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
 #' If "unchanged" they are not removed.
+#' @param img_type string; select the type of files searched for in the images folder.
+#' Default is "all", which returns any type of file (including hidden system files).
+#' Choosing "images" returns standard image types PNG and SVG only.
+#' Any other string will use regex to return any files with that filetype.
 #' @export
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
@@ -17,7 +21,8 @@ convert_rmd <- function(path,
                         images_folder = "graphs",
                         remove_blocks=FALSE,
                         sub_pattern = TRUE,
-                        page_break = "line"
+                        page_break = "line",
+                        img_type = "all"
 ) {
 
   ##If a null images directory is specified, skip image processing
@@ -33,7 +38,15 @@ convert_rmd <- function(path,
     } else{
 
   ##Check that files end with numeric values
-  files <- list.files(images_folder)
+  ##Only search image files; allow users to select which ones they want to check
+  if(img_type == "all"){
+    files <- list.files(images_folder)
+  } else if(img_type == "images"){
+    files <- list.files(images_folder, path = "[.](svg|png)")
+  } else{
+    files <- list.files(images_folder, path = paste0("[.]", img_type))
+  }
+
   files <- sub("\\..*", "", files)
   file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(files, -1)))))
   if(file_check != 1){
