@@ -10,6 +10,10 @@
 #' @param page_break string; chooses what page breaks are converted to on Whitehall.
 #' If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
 #' If "unchanged" they are not removed.
+#' @param img_type string; select the type of files searched for in the images folder.
+#' Default is "all", which returns any type of file (including hidden system files).
+#' Choosing "images" returns standard image types PNG and SVG only.
+#' Any other string will use regex to return any files with that filetype.
 #' @export
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
@@ -17,7 +21,8 @@ convert_rmd <- function(path,
                         images_folder = "graphs",
                         remove_blocks=FALSE,
                         sub_pattern = TRUE,
-                        page_break = "line"
+                        page_break = "line",
+                        img_type = "all"
 ) {
 
   ##If a null images directory is specified, skip image processing
@@ -30,12 +35,22 @@ convert_rmd <- function(path,
 
     stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
 
-    } else{
+  } else{
 
   ##Check that files end with numeric values
-  files <- list.files(images_folder)
-  files <- sub("\\..*", "", files)
-  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(files, -1)))))
+  ##Only search image files; allow users to select which ones they want to check
+  if(img_type == "all"){
+    files <- list.files(images_folder)
+
+  } else if(img_type == "images"){
+    files <- list.files(images_folder, pattern = "[.](svg|png)")
+  } else{
+    files <- list.files(images_folder, pattern = paste0("[.]", img_type))
+  }
+
+  file_check <- sub("\\..*", "", files)
+  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(file_check, -1)))))
+
   if(file_check != 1){
     stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
 
@@ -44,16 +59,14 @@ convert_rmd <- function(path,
 
   md_file <- paste(readLines(path), collapse = "\n")
 
-  img_files <- list.files(paste0(dirname(path),
-                                 "/",
-                                 images_folder))
+  img_files <- files
 
-  image_references <- generate_image_references(img_files)
-  govspeak_file <- convert_image_references(image_references,
-                                            md_file,
-                                            images_folder)
+   image_references <- generate_image_references(img_files)
+   govspeak_file <- convert_image_references(image_references,
+                                             md_file,
+                                             images_folder)
+
   }
-
   govspeak_file <- remove_header(govspeak_file)
 
   govspeak_file <- convert_callouts(govspeak_file)
