@@ -35,7 +35,7 @@ convert_rmd <- function(path,
 
     stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
 
-    } else{
+  } else{
 
   ##Check that files end with numeric values
   ##Only search image files; allow users to select which ones they want to check
@@ -61,12 +61,12 @@ convert_rmd <- function(path,
 
   img_files <- files
 
-  image_references <- generate_image_references(img_files)
-  govspeak_file <- convert_image_references(image_references,
-                                            md_file,
-                                            images_folder)
-  }
+   image_references <- generate_image_references(img_files)
+   govspeak_file <- convert_image_references(image_references,
+                                             md_file,
+                                             images_folder)
 
+  }
   govspeak_file <- remove_header(govspeak_file)
 
   govspeak_file <- convert_callouts(govspeak_file)
