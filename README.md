@@ -92,11 +92,7 @@ The full list of options that can be used in the first argument are:
 MoJ stats summary tables consist of three columns, one of which contains directional arrow images which are not compatible with publication through the Whitehall platform. Instead a 2-column table which omits these images and highlights key directional phrases and words is used. This function takes three vectors and conditionally produces either the two- or three- column table depending on the output type. A two-column table is produced in the govspeak output, and a three-column table is produced in all other output types.
 
 ### callout_box() 
-Some publications use a callout box to add emphasis to text in an online publication via $CTA tags. This function automatically adds these $CTA tags to text in the govspeakr output only. Any Rmarkdown code chunk using this function must include 
-```
-{r results='asis'}
-```
-in the chunk options.
+Some publications use a callout box to add emphasis to text in an online publication via $CTA tags. This function automatically adds these $CTA tags to text in the govspeakr output only. If the HTML output is not used as the govspeakr output, it will also format a grey box around any CTA text.
 
 ### add_email() 
 Email addresses should appear as links in the govspeakr output only, and as plain text in all other formats. This function conditionally adds "<>" bracketing email addresses in the govspeakr output only. It can be used in inline code in Rmarkdown e.g. 
