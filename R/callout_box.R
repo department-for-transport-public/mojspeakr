@@ -5,13 +5,10 @@
 #' @name callout_box
 #' @title Include a callout box in govspeak output
 callout_box <- function(text, format = "html"){
-  ##If format of chunk is not set to "asis", return a warning
-  if(opts_current$get("results") != "asis"){
-    warning("Chunk option must be set to result = 'asis'")
-  }
-
   if(knitr::opts_knit$get("rmarkdown.pandoc.to") %in% format){
-    cat(paste("$CTA", text, "$CTA", sep = '\n'))
+
+      knitr::asis_output(paste("$CTA", text, "$CTA", sep = '\n'))
+
   } else{
     cat(paste(text))}
 }
