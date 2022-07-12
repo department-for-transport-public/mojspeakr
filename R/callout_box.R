@@ -18,7 +18,6 @@ callout_box <- function(text, format = "html"){
         cta {
           text-align: left;
           background-color: #f3f2f1 ;
-          height: 40px;
           padding-top: 20px;
           padding-bottom: 60px;
           padding-left: 30px;
