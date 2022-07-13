@@ -6,7 +6,7 @@
 #' @title Add a logo to the top of a HTML pre-release
 add_logo <- function(img){
   ##If format of chunk is not set to "asis", return a warning
-  if(opts_current$get("results") != "asis"){
+  if(knitr::opts_current$get("results") != "asis"){
     warning("Chunk option must be set to result = 'asis'")
   }
 
