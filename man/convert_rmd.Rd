@@ -9,7 +9,8 @@ convert_rmd(
   images_folder = "graphs",
   remove_blocks = FALSE,
   sub_pattern = TRUE,
-  page_break = "line"
+  page_break = "line",
+  img_type = "all"
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ e.g. "#" will modify only first level headers.}
 \item{page_break}{string; chooses what page breaks are converted to on Whitehall.
 If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
 If "unchanged" they are not removed.}
+
+\item{img_type}{string; select the type of files searched for in the images folder.
+Default is "all", which returns any type of file (including hidden system files).
+Choosing "images" returns standard image types PNG and SVG only.
+Any other string will use regex to return any files with that filetype.}
 }
 \description{
 Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format
