@@ -7,7 +7,7 @@
 #' @title Include a formatted address in govspeak output
 add_address <- function(text, format = "html", unmodified = FALSE){
   ##If format of chunk is not set to "asis", return a warning
-  if(opts_current$get("results") != "asis"){
+  if(knitr::opts_current$get("results") != "asis"){
     warning("Chunk option must be set to result = 'asis'")
   }
 
