@@ -48,6 +48,11 @@ convert_rmd <- function(path,
     files <- list.files(images_folder, pattern = paste0("[.]", img_type))
   }
 
+  #Stop if no files found
+  if(length(files) == 0){
+    stop(paste("No files of type", img_type, "found"))
+  }
+
   file_check <- sub("\\..*", "", files)
   file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(file_check, -1)))))
 
