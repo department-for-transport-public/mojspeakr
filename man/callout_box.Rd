@@ -9,8 +9,10 @@ callout_box(text, format = "html")
 \arguments{
 \item{text}{string to publish in a callout box}
 
-\item{format}{string which identifies the outputs you would like the callout box tags to appear in. Set to HTML as default.}
+\item{format}{string which identifies the outputs you would like the
+callout box tags to appear in. Set to HTML as default.}
 }
 \description{
-Adds conditional CTA tags in govspeak only. Displays as text in a box in govspeak, and as simple text only in other formats.
+Adds conditional CTA tags in govspeak only. Displays as text in a box in
+govspeak, and as simple text only in other formats.
 }
