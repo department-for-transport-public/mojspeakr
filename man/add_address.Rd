@@ -9,10 +9,15 @@ add_address(text, format = "html", unmodified = FALSE)
 \arguments{
 \item{text}{address as a string, with each new line separated with a comma}
 
-\item{format}{string which identifies the outputs you would like the address tags to appear in. Set to HTML as default.}
+\item{format}{string which identifies the outputs you would like
+the address tags to appear in. Set to HTML as default.}
 
-\item{unmodified}{logical value. If true, address formatting will not be changed in any formats other than HTML. If false, address will be formatted to include linebreaks in all outputs.}
+\item{unmodified}{logical value. If true, address formatting will not be
+changed in any formats other than HTML.
+If false, address will be formatted to include linebreaks in all outputs.}
 }
 \description{
-Adds conditional address tags in govspeak only. Displays as formatted text in govspeak, and as simple text only in other formats.
+Adds conditional address tags in govspeak only.
+Displays as formatted text in govspeak,
+and as simple text only in other formats.
 }
