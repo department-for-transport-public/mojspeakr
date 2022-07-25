@@ -8,5 +8,6 @@ knitr_opts_set()
 }
 \description{
 Set parameters necessary for publishing on Whitehall.
-Includes setting specific figure height and width and suppressing warning messages
+Includes setting specific figure height and width and
+suppressing warning messages
 }

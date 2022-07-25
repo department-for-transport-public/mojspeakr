@@ -1,17 +1,25 @@
-#' Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format
+#' Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown
+#' format
 #' @param path string; filename (including path) to *.md file for conversion
 #' @param images_folder string; folder containing images for *.md file. Defaults
 #'   to "graphs"
 #' @param remove_blocks bool; decision to remove block elements from *.md file.
 #'   This includes code blocks and warnings
-#' @param sub_pattern bool or vector; decision to increase hashed headers by one level in *.md file.
-#'   TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows individual headings to be modified as required.
+#' @param sub_pattern bool or vector; decision to increase hashed headers by
+#' one level in *.md file.
+#'   TRUE will substitute all, FALSE will substitute none, while a vector of
+#'   the desired substitution levels allows individual headings to be modified
+#'   as required.
 #'   e.g. "#" will modify only first level headers.
-#' @param page_break string; chooses what page breaks are converted to on Whitehall.
-#' If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
+#' @param page_break string; chooses what page breaks are converted to on
+#' Whitehall.
+#' If "line", page breaks are replaced with a horizontal rule. If "none"
+#' they are replaced with a line break.
 #' If "unchanged" they are not removed.
-#' @param img_type string; select the type of files searched for in the images folder.
-#' Default is "all", which returns any type of file (including hidden system files).
+#' @param img_type string; select the type of files searched for in the
+#' images folder.
+#' Default is "all", which returns any type of file
+#' (including hidden system files).
 #' Choosing "images" returns standard image types PNG and SVG only.
 #' Any other string will use regex to return any files with that filetype.
 #' @export
@@ -19,45 +27,57 @@
 #' @title Convert standard markdown file to govspeak
 convert_rmd <- function(path,
                         images_folder = "graphs",
-                        remove_blocks=FALSE,
+                        remove_blocks = FALSE,
                         sub_pattern = TRUE,
                         page_break = "line",
                         img_type = "all"
 ) {
 
   ##If a null images directory is specified, skip image processing
-  if(is.null(images_folder)){
+  if (is.null(images_folder)) {
 
     md_file <- paste(readLines(path), collapse = "\n")
     govspeak_file <- as.character(md_file)
     ##Check listed directory exists
-  } else if (dir.exists(images_folder) == F) {
+  } else if (dir.exists(images_folder) == FALSE) {
 
-    stop(paste0("The specified images folder (", images_folder, ") does not exist. Please use the images_folder argument to specify the correct location"))
+    stop(paste0("The specified images folder (",
+                images_folder,
+                ") does not exist. Please use the images_folder argument",
+                "to specify the correct location"))
 
-  } else{
+  } else {
 
   ##Check that files end with numeric values
   ##Only search image files; allow users to select which ones they want to check
-  if(img_type == "all"){
+  if (img_type == "all") {
+
     files <- list.files(images_folder)
 
-  } else if(img_type == "images"){
+  } else if (img_type == "images") {
+
     files <- list.files(images_folder, pattern = "[.](svg|png)")
-  } else{
+
+  } else {
+
     files <- list.files(images_folder, pattern = paste0("[.]", img_type))
+
   }
 
   #Stop if no files found
-  if(length(files) == 0){
+  if (length(files) == 0) {
     stop(paste("No files of type", img_type, "found"))
   }
 
   file_check <- sub("\\..*", "", files)
-  file_check <- suppressWarnings(mean(!is.na(as.numeric(stringi::stri_sub(file_check, -1)))))
+  file_check <- all(grepl("^\\d{1}$", stringi::stri_sub(file_check, -1)))
 
-  if(file_check != 1){
-    stop(paste("Not all filenames in folder", images_folder, "start and end with numeric values. If you have uploaded images not produced in this Markdown file, please make sure they are named appropriately."))
+  if (file_check != 1) {
+    stop(paste("Not all filenames in folder",
+               images_folder,
+               "start and end with numeric values.",
+               "If you have uploaded images not produced in this Markdown",
+               "file please make sure they are named appropriately."))
 
   }
 
@@ -76,12 +96,17 @@ convert_rmd <- function(path,
 
   govspeak_file <- convert_callouts(govspeak_file)
 
-  #Remove long strings of hashes/page break indicators and move all headers down one level
-  if(page_break == "line"){
-    govspeak_file <- gsub("#####|##### <!-- Page break -->", "-----", govspeak_file)
-  }else if(page_break == "none"){
-    govspeak_file <- gsub("#####|##### <!-- Page break -->", "\n", govspeak_file)
-  }else if(page_break == "unchanged"){
+  #Remove long strings of hashes/page break indicators
+  #and move all headers down one level
+  if (page_break == "line") {
+    govspeak_file <- gsub("#####|##### <!-- Page break -->",
+                          "-----",
+                          govspeak_file)
+  }else if (page_break == "none") {
+    govspeak_file <- gsub("#####|##### <!-- Page break -->",
+                          "\n",
+                          govspeak_file)
+  }else if (page_break == "unchanged") {
     govspeak_file <- govspeak_file
   }
 
