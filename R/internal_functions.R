@@ -75,7 +75,7 @@ convert_image_references <- function(image_references, md_file, images_folder) {
     file_name <- image_references$image_file[i]
 
     # Construct markdown reference to image file
-    md_image_format <- paste0("!\\[\\]\\(",
+    md_image_format <- paste0("!\\[\\]\\(.*",
                               images_folder,
                               "/",
                               file_name,
