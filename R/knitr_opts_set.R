@@ -20,6 +20,6 @@ knitr_opts_set <- function(fig.path = "graphs/") {
     dpi = 72,
   # The default path for mojspeakr::convert_rmd() to check for images
   #is ./graphs
-    fig.path = "graphs/"
+    fig.path = fig.path
   )
 }

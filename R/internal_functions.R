@@ -51,12 +51,13 @@ generate_image_references <- function(lines) {
   ##Make it a table with row line numbers from original text indicated
   data <- data.frame(img_tags = img_tags)
 
-  for(i in 1:nrow(data)){
+  for (i in seq_len(data)){
     data[i, "lines"] <- grep(data[i, "img_tags"], lines, fixed = TRUE)
   }
 
-  ##Order by row number and figure name (will be in order if they're from the same block)
-  data[order( data$lines, data$img_tags ),]
+  ##Order by row number and figure name
+  #(will be in order if they're from the same block)
+  data[order(data$lines, data$img_tags), ]
 
   ##Create clean image references and govspeak tags
   data$img_ref <- gsub("\\!\\[\\][(](.*)[)]", "\\1", data$img_tags)
@@ -138,7 +139,8 @@ hash_sub <- function(x, sub_type) {
   } else {
     ##Substitute the values passed to the argument as a vector
     #Collapse that funky little vector into a regex string
-    sub_type <- paste0("(\\b|[^#])(", paste(sub_type, collapse = "|"), ")([^#])")
+    sub_type <- paste0("(\\b|[^#])(",
+                       paste(sub_type, collapse = "|"), ")([^#])")
 
     #Regex; swap any of the listed patterns for that plus one #.
     #God 2022 Fran is so much better at this that 2019 Fran

@@ -38,7 +38,7 @@ convert_rmd <- function(path,
   img_ref <- generate_image_references(md_file)
 
   #Lets do a little gsub
-  for(i in 1:nrow(img_ref)){
+  for (i in seq_len(img_ref)) {
     md_file <- gsub(paste0(img_ref[i, "img_tags"], "<!-- -->"),
                     paste0(img_ref[i, "govspeak"], "\n"),
                     md_file,
