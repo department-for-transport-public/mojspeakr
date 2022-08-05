@@ -147,22 +147,6 @@ remove_rmd_blocks <- function(md_file) {
 
 }
 
-#' Bold all text in a vector
-#' @param data vector containing strings of interest
-#' @name bold_text
-#' @keywords internal
-#' @title Add RMarkdown annotation to bold all text in a vector
-bold_text <- function(data) {
-
-  bolded <- NULL
-  for (i in seq_along(data)) {
-
-    a <- paste0("**", data[i], "**")
-    bolded <- c(bolded, a)
-  }
-
-  return(bolded)
-}
 
 #' Substitute hashed Rmarkdown headers with the next level down down
 #' e.g. # to ##
