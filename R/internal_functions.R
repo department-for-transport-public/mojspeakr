@@ -21,20 +21,12 @@ bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
 
   temp <- data
   for (i in seq_along(key_words)) {
-    sub_words <- paste0(" **", key_words[i], "** ")
-    search_words <- paste0(" ", key_words[i], " ")
-    bracket_sub_words <- paste0("\\(**", key_words[i], "** ")
-    bracket_search_words <- paste0("\\(", key_words[i], " ")
 
-    temp <- gsub(search_words,
-                 sub_words,
+    temp <- gsub(paste0("\\b", key_words[i], "\\b"),
+                 paste0("**", key_words[i], "**"),
                  temp,
                  ignore.case = TRUE)
 
-    temp <- gsub(bracket_search_words,
-                 bracket_sub_words,
-                 temp,
-                 ignore.case = TRUE)
   }
   return(temp)
 }
