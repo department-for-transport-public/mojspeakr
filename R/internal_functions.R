@@ -51,7 +51,7 @@ generate_image_references <- function(lines) {
   ##Make it a table with row line numbers from original text indicated
   data <- data.frame(img_tags = img_tags)
 
-  for (i in seq_len(data)){
+  for (i in 1:nrow(data)){
     data[i, "lines"] <- grep(data[i, "img_tags"], lines, fixed = TRUE)
   }
 
