@@ -44,32 +44,24 @@ bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
 generate_image_references <- function(img_filenames) {
 
   # Strip ext - not image file specific
-  image_references <- data.frame(image_file =
-                                   tools::file_path_sans_ext(img_filenames))
+  image_references <- tools::file_path_sans_ext(img_filenames)
 
-  # Capture chunk number and image position within chunk
-  if (!all(grepl("^[0-9]", image_references$image_file))) {
+  names(image_references) <- image_references
+
+    # Capture chunk number and image position within chunk
+  if (!all(grepl("^[0-9]", image_references))) {
     stop("image chunk names must start with a number,
          which should correspond to their order in the .Rmd file")
   }
 
-  image_references$pre_dec <- gsub("([0-9]+).*$",
-                                   "\\1",
-                                   image_references$image_reference)
-  image_references$post_dec <- gsub(".*([0-9]+)$",
-                                    "\\1",
-                                    image_references$image_reference)
+  ##Extract numbers from image references from start and end
+  image_references <- gsub("(^\\d{1+}).*(\\d{1+}$)",
+                           "\\1.\\2",
+                           image_references)
 
-  # Convert to decimal for ranking
-  image_references$combined <- as.numeric(paste0(image_references$pre_dec,
-                                                 ".",
-                                                 image_references$post_dec))
-
-  image_references$image_reference <- paste0("!!",
-                                             rank(image_references$combined))
+  image_references <- paste0("!!", rank(image_references))
 
   # Keep mapping of image files to govspeak references
-  image_references <- image_references[, c("image_file", "image_reference")]
   return(image_references)
 }
 
@@ -83,6 +75,7 @@ generate_image_references <- function(img_filenames) {
 #' @keywords internal
 #' @title Convert markdown image references to govdown
 convert_image_references <- function(image_references, md_file, images_folder) {
+
   govspeak_image_reference_file <- as.character(md_file)
   for (i in seq_along(image_references$image_file)) {
     file_name <- image_references$image_file[i]
