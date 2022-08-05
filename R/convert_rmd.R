@@ -26,72 +26,29 @@
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
 convert_rmd <- function(path,
-                        images_folder = "graphs",
                         remove_blocks = FALSE,
                         sub_pattern = TRUE,
-                        page_break = "line",
-                        img_type = "all"
-) {
+                        page_break = "line") {
 
-  ##If a null images directory is specified, skip image processing
-  if (is.null(images_folder)) {
 
-    md_file <- paste(readLines(path), collapse = "\n")
-    govspeak_file <- as.character(md_file)
-    ##Check listed directory exists
-  } else if (dir.exists(images_folder) == FALSE) {
+  #Read in the raw lines from the md
+  md_file <- readLines(path)
 
-    stop(paste0("The specified images folder (",
-                images_folder,
-                ") does not exist. Please use the images_folder argument",
-                "to specify the correct location"))
+  #Get a nice table of image references
+  img_ref <- generate_image_references(md_file)
 
-  } else {
-
-  ##Check that files end with numeric values
-  ##Only search image files; allow users to select which ones they want to check
-  if (img_type == "all") {
-
-    files <- list.files(images_folder)
-
-  } else if (img_type == "images") {
-
-    files <- list.files(images_folder, pattern = "[.](svg|png)")
-
-  } else {
-
-    files <- list.files(images_folder, pattern = paste0("[.]", img_type))
-
+  #Lets do a little gsub
+  for(i in 1:nrow(img_ref)){
+    md_file <- gsub(paste0(img_ref[i, "img_tags"], "<!-- -->"),
+                    paste0(img_ref[i, "govspeak"], "\n"),
+                    md_file,
+                    fixed = TRUE)
   }
 
-  #Stop if no files found
-  if (length(files) == 0) {
-    stop(paste("No files of type", img_type, "found"))
-  }
-
-  file_check <- sub("\\..*", "", files)
-  file_check <- all(grepl("^\\d{1}$", stringi::stri_sub(file_check, -1)))
-
-  if (file_check != 1) {
-    stop(paste("Not all filenames in folder",
-               images_folder,
-               "start and end with numeric values.",
-               "If you have uploaded images not produced in this Markdown",
-               "file please make sure they are named appropriately."))
-
-  }
+  ##Turn md file into plain text
+  govspeak_file <- paste(md_file, collapse = "\n")
 
 
-  md_file <- paste(readLines(path), collapse = "\n")
-
-  img_files <- files
-
-   image_references <- generate_image_references(img_files)
-   govspeak_file <- convert_image_references(image_references,
-                                             md_file,
-                                             images_folder)
-
-  }
   govspeak_file <- remove_header(govspeak_file)
 
   govspeak_file <- convert_callouts(govspeak_file)
@@ -113,11 +70,17 @@ convert_rmd <- function(path,
   ##Substitute hashes according to pattern
   govspeak_file <- hash_sub(govspeak_file, sub_type = sub_pattern)
 
-  ##Write output as converted file
-  write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
-
   ##Remove YAML block if requested
   if (remove_blocks) {
     govspeak_file <- remove_rmd_blocks(govspeak_file)
   }
+
+  ##Write output as converted file
+  write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
+
+  ##Write out lil csv of the image path to govspeak lookup
+  write.csv(img_ref[, c("img_ref", "govspeak")],
+            file = paste0(gsub("(.*[/])*.", "\\1", path), "img_lookup.csv"))
+
+
 }
