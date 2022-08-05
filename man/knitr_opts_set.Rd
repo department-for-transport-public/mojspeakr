@@ -4,7 +4,10 @@
 \alias{knitr_opts_set}
 \title{Set knitr parameters to allow publishing on Whitehall}
 \usage{
-knitr_opts_set()
+knitr_opts_set(fig.path = "graphs/")
+}
+\arguments{
+\item{fig.path}{folder to save generated images to. Defaults to "graphs"}
 }
 \description{
 Set parameters necessary for publishing on Whitehall.

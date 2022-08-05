@@ -4,15 +4,13 @@
 \alias{generate_image_references}
 \title{Generate govdown image references}
 \usage{
-generate_image_references(img_filenames)
+generate_image_references(lines)
 }
 \arguments{
-\item{img_filenames}{character vector of files to be referenced in govdown
-format (!!n). The filename must start and end with a number and have text in
-between (eg, "1-abcd-1.png")}
+\item{lines}{raw contents of md file (from readLines)}
 }
 \description{
-Converts image file names to a dataframe, with a field containing the
-original image name and corresponding govdown reference
+Extracts image references from the original markdown output
+creates a lookup between filename and new govdown reference number
 }
 \keyword{internal}

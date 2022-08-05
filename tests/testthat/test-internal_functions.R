@@ -11,7 +11,7 @@ test_that("false sub_type does nothing", {
 })
 
 test_that("selecting which strings to sub works", {
-  expect_identical(hash_sub("##", sub_type = c("#|##")), "###")
-  expect_identical(hash_sub("###", sub_type = c("#|##")), "###")
+  expect_identical(hash_sub("## ", sub_type = c("#|##")), "### ")
+  expect_identical(hash_sub("### ", sub_type = c("#|##")), "### ")
   expect_identical(hash_sub("## This is text", sub_type = c("#|##")), "### This is text")
 })
