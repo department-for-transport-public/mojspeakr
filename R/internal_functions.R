@@ -33,70 +33,37 @@ bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
 
 
 
-#' Converts image file names to a dataframe, with a field containing the
-#' original image name and corresponding govdown reference
-#' @param img_filenames character vector of files to be referenced in govdown
-#' format (!!n). The filename must start and end with a number and have text in
-#' between (eg, "1-abcd-1.png")
+#' Extracts image references from the original markdown output
+#' creates a lookup between filename and new govdown reference number
+#' @param lines raw contents of md file (from readLines)
 #' @name generate_image_references
 #' @keywords internal
 #' @title Generate govdown image references
-generate_image_references <- function(img_filenames) {
+generate_image_references <- function(lines) {
 
-  # Strip ext - not image file specific
-  image_references <- tools::file_path_sans_ext(img_filenames)
+  ##Find the image tags (one per line chaps)
+  img_tags <- lines[grep("\\!\\[\\]\\(*.", lines)]
+  ##Drop arrows to allow us to split on !
+  img_tags <- gsub("<!-- -->", "", img_tags, fixed = TRUE)
+  #Now we split them on the ! baybeeee
+  img_tags <- unlist(strsplit(img_tags, split = "(?<=.)(?=[!])", perl = TRUE))
 
-  names(image_references) <- image_references
+  ##Make it a table with row line numbers from original text indicated
+  data <- data.frame(img_tags = img_tags)
 
-    # Capture chunk number and image position within chunk
-  if (!all(grepl("^[0-9]", image_references))) {
-    stop("image chunk names must start with a number,
-         which should correspond to their order in the .Rmd file")
+  for(i in 1:nrow(data)){
+    data[i, "lines"] <- grep(data[i, "img_tags"], lines, fixed = TRUE)
   }
 
-  ##Extract numbers from image references from start and end
-  image_references <- gsub("(^\\d{1+}).*(\\d{1+}$)",
-                           "\\1.\\2",
-                           image_references)
+  ##Order by row number and figure name (will be in order if they're from the same block)
+  data[order( data$lines, data$img_tags ),]
 
-  image_references <- paste0("!!", rank(image_references))
+  ##Create clean image references and govspeak tags
+  data$img_ref <- gsub("\\!\\[\\][(](.*)[)]", "\\1", data$img_tags)
+  data$govspeak <- paste0("!!", row.names(data))
 
-  # Keep mapping of image files to govspeak references
-  return(image_references)
-}
+  return(data)
 
-
-#' Convert markdown image references to govspeak format (!!n)
-#' @param image_references dataframe of image file names and associated govdown
-#'   reference.
-#' @param md_file string with markdown file text
-#' @param images_folder string; folder containing images for *.md file
-#' @name convert_image_references
-#' @keywords internal
-#' @title Convert markdown image references to govdown
-convert_image_references <- function(image_references, md_file, images_folder) {
-
-  govspeak_image_reference_file <- as.character(md_file)
-  for (i in seq_along(image_references$image_file)) {
-    file_name <- image_references$image_file[i]
-
-    # Construct markdown reference to image file
-    md_image_format <- paste0("!\\[\\]\\(",
-                              images_folder,
-                              "/",
-                              file_name,
-                              "\\)<!-- -->")
-
-    govspeak_reference <- paste0(as.character(
-      image_references$image_reference[i]),
-      "\n")
-
-    # Replace markdown image reference with govspeak reference
-    govspeak_image_reference_file <- gsub(md_image_format,
-                                          govspeak_reference,
-                                          govspeak_image_reference_file)
-  }
-  return(govspeak_image_reference_file)
 }
 
 
