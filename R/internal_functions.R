@@ -20,23 +20,23 @@ bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
   }
 
   temp <- data
-    for (i in seq_along(key_words)) {
-      sub_words <- paste0(" **", key_words[i], "** ")
-      search_words <- paste0(" ", key_words[i], " ")
-      bracket_sub_words <- paste0("\\(**", key_words[i], "** ")
-      bracket_search_words <- paste0("\\(", key_words[i], " ")
+  for (i in seq_along(key_words)) {
+    sub_words <- paste0(" **", key_words[i], "** ")
+    search_words <- paste0(" ", key_words[i], " ")
+    bracket_sub_words <- paste0("\\(**", key_words[i], "** ")
+    bracket_search_words <- paste0("\\(", key_words[i], " ")
 
-      temp <- gsub(search_words,
-                   sub_words,
-                   temp,
-                   ignore.case = TRUE)
+    temp <- gsub(search_words,
+                 sub_words,
+                 temp,
+                 ignore.case = TRUE)
 
-      temp <- gsub(bracket_search_words,
-                   bracket_sub_words,
-                   temp,
-                   ignore.case = TRUE)
-    }
-    return(temp)
+    temp <- gsub(bracket_search_words,
+                 bracket_sub_words,
+                 temp,
+                 ignore.case = TRUE)
+  }
+  return(temp)
 }
 
 
@@ -96,7 +96,7 @@ convert_image_references <- function(image_references, md_file, images_folder) {
     file_name <- image_references$image_file[i]
 
     # Construct markdown reference to image file
-    md_image_format <- paste0("!\\[\\]\\(.*",
+    md_image_format <- paste0("!\\[\\]\\(",
                               images_folder,
                               "/",
                               file_name,
@@ -104,7 +104,7 @@ convert_image_references <- function(image_references, md_file, images_folder) {
 
     govspeak_reference <- paste0(as.character(
       image_references$image_reference[i]),
-                                 "\n")
+      "\n")
 
     # Replace markdown image reference with govspeak reference
     govspeak_image_reference_file <- gsub(md_image_format,
@@ -181,32 +181,33 @@ bold_text <- function(data) {
 
 #' Substitute hashed Rmarkdown headers with the next level down down
 #' e.g. # to ##
-#' @param data object to substitute
+#' @param x string object to substitute one # value for another
 #' @param sub_type logical or vector, TRUE will substitute all heading levels,
 #' FALSE will substitute none, alternatively a vector will allow you
-#' to select specific levels of vector.
+#' to select specific levels of header to substitute.
 #' @name hash_sub
 #' @keywords internal
 #' @title Increase Rmarkdown headers by one level
 #'
-hash_sub <- function(data, sub_type) {
+hash_sub <- function(x, sub_type) {
 
   if (TRUE %in% sub_type) {
 
-    gsub("# ", "## ", data)
+    #Substitute any number of hashes for that number plus 1
+    gsub("(#{1,})", "\\1#", x)
 
-    } else if (FALSE %in% sub_type) {
-      data
-      } else {
-        sub_type <- sub_type[(order(stringi::stri_length(sub_type),
-                                    decreasing = TRUE))]
-        data_final <- data
-        for (i in seq_along(sub_type)) {
+  } else if (FALSE %in% sub_type) {
+    #Sub nothing
+    x
+  } else {
+    ##Substitute the values passed to the argument as a vector
+    #Collapse that funky little vector into a regex string
+    sub_type <- paste0("(", paste(sub_type, collapse = "|"), ")")
 
-          sub_type1 <- paste0("\n", sub_type[i], " ")
-          replacement <- gsub("# ", "## ", sub_type1)
-          data_final <- gsub(sub_type1, replacement, data_final)
-          }
-        return(data_final)
-      }
+    #Regex; swap any of the listed patterns for that plus one #.
+    #God 2022 Fran is so much better at this that 2019 Fran
+    x <- gsub(sub_type, "\\1#", x)
+
+    return(x)
   }
+}

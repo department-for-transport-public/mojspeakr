@@ -3,8 +3,9 @@
 #' suppressing warning messages
 #' @export
 #' @name knitr_opts_set
+#' @param fig.path folder to save generated images to. Defaults to "graphs"
 #' @title Set knitr parameters to allow publishing on Whitehall
-knitr_opts_set <- function() {
+knitr_opts_set <- function(fig.path = "graphs/") {
 
   knitr::opts_chunk$set(
   #Prevent creation of warning or other message blocks - should be used only
