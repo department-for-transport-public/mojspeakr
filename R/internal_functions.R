@@ -202,11 +202,11 @@ hash_sub <- function(x, sub_type) {
   } else {
     ##Substitute the values passed to the argument as a vector
     #Collapse that funky little vector into a regex string
-    sub_type <- paste0("(", paste(sub_type, collapse = "|"), ")")
+    sub_type <- paste0("(\\b|[^#])(", paste(sub_type, collapse = "|"), ")([^#])")
 
     #Regex; swap any of the listed patterns for that plus one #.
     #God 2022 Fran is so much better at this that 2019 Fran
-    x <- gsub(sub_type, "\\1#", x)
+    x <- gsub(sub_type, "\\1#\\2\\3", x)
 
     return(x)
   }
