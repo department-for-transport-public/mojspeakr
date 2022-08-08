@@ -1,19 +1,22 @@
 #' Add a logo to the top of a HTML pre-release to mimic the appearance of gov.uk
-#' This should be done for the pre-release only, and not for the final statistics publication
+#' This should be done for the pre-release only, and not for the final
+#' statistics publication
 #' @param img string giving the location of the logo as a png file.
 #' @export
 #' @name add_logo
 #' @title Add a logo to the top of a HTML pre-release
-add_logo <- function(img){
+add_logo <- function(img) {
   ##If format of chunk is not set to "asis", return a warning
-  if(knitr::opts_current$get("results") != "asis"){
+  if (knitr::opts_current$get("results") != "asis") {
     warning("Chunk option must be set to result = 'asis'")
   }
 
-  conditional_publishing_output(
-    output = cat("[<img src='",
-                 img,
-                 "'  width='120' height='120'>](https://www.gov.uk/government/organisations/ministry-of-justice)", sep = ""),
-    publication_type = "html")
+    conditional_publishing_output(
+      output = cat("[<img src='",
+                   img,
+                   "'  width='120' height='120'>]",
+                   "(https://www.gov.uk/government/",
+                   "organisations/ministry-of-justice)",
+                   sep = ""),
+      publication_type = "html")
 }
-

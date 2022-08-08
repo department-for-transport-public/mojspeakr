@@ -9,9 +9,12 @@ hash_sub(data, sub_type)
 \arguments{
 \item{data}{object to substitute}
 
-\item{sub_type}{logical or vector, TRUE will substitute all heading levels, FALSE will substitute none, alternatively a vector will allow you to select specific levels of vector.}
+\item{sub_type}{logical or vector, TRUE will substitute all heading levels,
+FALSE will substitute none, alternatively a vector will allow you
+to select specific levels of vector.}
 }
 \description{
-Substitute hashed Rmarkdown headers with the next level down down e.g. # to ##
+Substitute hashed Rmarkdown headers with the next level down down
+e.g. # to ##
 }
 \keyword{internal}
