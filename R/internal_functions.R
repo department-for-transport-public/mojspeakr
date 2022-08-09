@@ -55,6 +55,9 @@ generate_image_references <- function(lines) {
     data[i, "lines"] <- grep(data[i, "img_tags"], lines, fixed = TRUE)
   }
 
+  #Remove any image tags that are just a rogue !
+  data <- data[data$img_tags != "!",]
+
   ##Order by row number and figure name
   #(will be in order if they're from the same block)
   data[order(data$lines, data$img_tags), ]
