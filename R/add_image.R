@@ -12,5 +12,5 @@
 #' @name add_image
 #' @title Highlight in bold key words in summary text
 add_image <- function(file_name, folder = "graphs") {
-  paste0("![](", folder, "/", file_name, ")<!-- -->")
+  knitr::asis_output(paste0("![](", folder, "/", file_name, ")<!-- -->"))
 }

@@ -6,18 +6,13 @@
 \usage{
 convert_rmd(
   path,
-  images_folder = "graphs",
   remove_blocks = FALSE,
   sub_pattern = TRUE,
-  page_break = "line",
-  img_type = "all"
+  page_break = "line"
 )
 }
 \arguments{
 \item{path}{string; filename (including path) to *.md file for conversion}
-
-\item{images_folder}{string; folder containing images for *.md file. Defaults
-to "graphs"}
 
 \item{remove_blocks}{bool; decision to remove block elements from *.md file.
 This includes code blocks and warnings}
@@ -34,13 +29,6 @@ Whitehall.
 If "line", page breaks are replaced with a horizontal rule. If "none"
 they are replaced with a line break.
 If "unchanged" they are not removed.}
-
-\item{img_type}{string; select the type of files searched for in the
-images folder.
-Default is "all", which returns any type of file
-(including hidden system files).
-Choosing "images" returns standard image types PNG and SVG only.
-Any other string will use regex to return any files with that filetype.}
 }
 \description{
 Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown

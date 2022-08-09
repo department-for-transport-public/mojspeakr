@@ -8,27 +8,24 @@
 #' changed in any formats other than HTML.
 #' If false, address will be formatted to include linebreaks in all outputs.
 #' @export
+#' @importFrom knitr asis_output
 #' @name add_address
 #' @title Include a formatted address in govspeak output
 add_address <- function(text, format = "html", unmodified = FALSE) {
-  ##If format of chunk is not set to "asis", return a warning
-  if (knitr::opts_current$get("results") != "asis") {
-    warning("Chunk option must be set to result = 'asis'")
-  }
 
   if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% format) {
 
     text <- gsub(",", " \n", text)
-    cat(paste("$A", text, "$A", sep = "\n"))
+    knitr::asis_output(paste("$A", text, "$A", sep = "\n"))
 
   } else if (unmodified == FALSE) {
 
     text <- gsub(",", "  \n", text)
-    cat(paste(text))
+    knitr::asis_output(text)
 
   } else if (unmodified == TRUE) {
 
-    cat(paste(text))
+    knitr::asis_output(text)
 
     }
 

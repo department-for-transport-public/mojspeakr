@@ -27,7 +27,7 @@ add_summary_table <- function(left,
                               key_words_remove = NULL,
                               format = "html") {
 
-  left <- bold_text(left)
+  left <- paste0("**", left, "**")
 
   if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% format) {
       right_bolded <- bold_key_words(right,
