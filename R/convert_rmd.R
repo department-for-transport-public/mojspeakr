@@ -15,6 +15,7 @@
 #' they are replaced with a line break.
 #' If "unchanged" they are not removed.
 #' @export
+#' @importFrom utils write.csv
 #' @name convert_rmd
 #' @title Convert standard markdown file to govspeak
 convert_rmd <- function(path,
