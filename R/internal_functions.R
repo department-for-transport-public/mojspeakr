@@ -67,7 +67,6 @@ generate_image_references <- function(lines) {
   data$govspeak <- paste0("!!", row.names(data))
 
   return(data)
-
 }
 
 
