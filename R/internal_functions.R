@@ -20,7 +20,7 @@ bold_key_words <- function(data, key_words = NULL, key_words_remove = NULL) {
   }
 
   temp <- data
-  for (i in seq_along(key_words)) {
+  for (i in 1:length(key_words)) {
 
     temp <- gsub(paste0("\\b", key_words[i], "\\b"),
                  paste0("**", key_words[i], "**"),
