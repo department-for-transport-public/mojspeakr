@@ -43,10 +43,12 @@ generate_image_references <- function(lines) {
 
   ##Find the image tags (one per line chaps)
   img_tags <- lines[grep("\\!\\[\\]\\(*.", lines)]
-  ##Drop arrows to allow us to split on !
-  img_tags <- gsub("<!-- -->", "", img_tags, fixed = TRUE)
-  #Now we split them on the ! baybeeee
+  #Split on the ! symbols
   img_tags <- unlist(strsplit(img_tags, split = "(?<=.)(?=[!])", perl = TRUE))
+  ##Drop anything which doesn't then start with ![]
+  img_tags <- img_tags[grepl('![]', img_tags, fixed = TRUE)]
+  #Clean up trailing < symbols
+  img_tags <- gsub("[<]$", "", img_tags)
 
   ##Make it a table with row line numbers from original text indicated
   data <- data.frame(img_tags = img_tags)
@@ -55,12 +57,9 @@ generate_image_references <- function(lines) {
     data[i, "lines"] <- grep(data[i, "img_tags"], lines, fixed = TRUE)
   }
 
-  #Remove any image tags that are just a rogue !
-  data <- data[data$img_tags != "!",]
-
   ##Order by row number and figure name
   #(will be in order if they're from the same block)
-  data[order(data$lines, data$img_tags), ]
+  data <- data[order(data$lines, data$img_tags), ]
 
   ##Create clean image references and govspeak tags
   data$img_ref <- gsub("\\!\\[\\][(](.*)[)]", "\\1", data$img_tags)
