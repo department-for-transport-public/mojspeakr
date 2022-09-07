@@ -86,6 +86,8 @@ Figure 1
 * As GOV.UK cannot accept first-level headers (single #), all hashed headers are increased by one level i.e.
 ``` # Title ``` becomes ```## Title```. This functionality can be controlled using the sub_pattern argument. Setting it to TRUE increases all headers by one level. FALSE results in no changes to the headers as written. Passing the argument a vector allows selective changing of specific headers, e.g. ```sub_pattern = c("#", "##")``` would change only first and second level headers.
 
+* Image names can be converted to a tidy standardised form of "image-X.png/svg". Passing a folder path for the image folder working directory (usually the same as the Rmarkdown working directory) converts the image names in that directory.
+
 This function should be run in a separate utility script distinct from the Rmarkdown document. It produces two outputs; a govspeak format md file called x_converted.md, where x is the name of the original .md file, and a csv called img_lookup.csv, which provides a mapping of the expected image names to markdown image tags for QA purposes.  
 
 ### Formatting of govspeak documents for publication
