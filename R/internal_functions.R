@@ -150,3 +150,43 @@ hash_sub <- function(x, sub_type) {
     return(x)
   }
 }
+
+#Take our image references and number them in a way that
+#doesn't look like a drunk mathematician rolling dice
+#' @param img_ref table of image references
+#' @param img_wd working directory that image paths are listed from.
+#' In most cases, this will be the same folder as the md document is stored in
+#' @name order_img_ref
+#' @keywords internal
+#' @title Order image references in a logical way
+
+order_img_ref <- function(img_ref, img_wd){
+
+  ##Take image references and swap out the img_ref so they're all just called
+  #image-something in order
+  img_ref$img_ref_old <- img_ref$img_ref
+
+  for(i in 1:nrow(img_ref)){
+    img_ref[i, "img_ref"] <- gsub("(.*[/]).*([.].*)$",
+                                  paste0("\\1", "image", i, "\\2"),
+                                  img_ref[i, "img_ref"])
+
+    #Rename our images to match
+    #Include warning if it's not found
+    if(file.exists(file.path(img_wd, img_ref[i, "img_ref_old"]))){
+      file.rename(
+        from = file.path(img_wd, img_ref[i, "img_ref_old"]),
+        to = file.path(img_wd, img_ref[i, "img_ref"]))
+
+      message(file.path(img_wd, img_ref[i, "img_ref_old"]), " renamed to ",
+      file.path(img_wd, img_ref[i, "img_ref"]))
+    } else{
+
+      warning(
+       file.path(img_wd, img_ref[i, "img_ref_old"]), " not found")
+    }
+  }
+
+  return(img_ref)
+
+}
