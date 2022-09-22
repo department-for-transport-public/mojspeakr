@@ -14,6 +14,11 @@
 #' If "line", page breaks are replaced with a horizontal rule. If "none"
 #' they are replaced with a line break.
 #' If "unchanged" they are not removed.
+#' @param img_wd path to working directory where images folder is stored.
+#' In normal usage, this will be the same folder as your markdown file is saved
+#' in. This can be passed as an absolute or relative path. Providing a path
+#' will convert your image names into a standardised form, default is NULL
+#' which does not convert image names.
 #' @export
 #' @importFrom utils write.csv
 #' @name convert_rmd
@@ -21,7 +26,8 @@
 convert_rmd <- function(path,
                         remove_blocks = FALSE,
                         sub_pattern = TRUE,
-                        page_break = "line") {
+                        page_break = "line",
+                        img_wd = NULL) {
 
 
   #Read in the raw lines from the md
@@ -71,9 +77,16 @@ convert_rmd <- function(path,
   ##Write output as converted file
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
 
+  ##If img_wd isn't set to NULL, convert our image tags
+  if(!is.null(img_wd)){
+    img_ref <- order_img_ref(img_ref = img_ref,
+                             img_wd = img_wd)
+  }
+
   ##Write out lil csv of the image path to govspeak lookup
   write.csv(img_ref[, c("img_ref", "govspeak")],
-            file = paste0(gsub("(.*[/])*.", "\\1", path), "img_lookup.csv"))
+            file = paste0(gsub("(.*[/])*.", "\\1", path), "img_lookup.csv"),
+            row.names = FALSE)
 
 
 }
