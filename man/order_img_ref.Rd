@@ -4,7 +4,7 @@
 \alias{order_img_ref}
 \title{Order image references in a logical way}
 \usage{
-order_img_ref(img_ref, img_folder)
+order_img_ref(img_ref, img_wd)
 }
 \arguments{
 \item{img_ref}{table of image references}
