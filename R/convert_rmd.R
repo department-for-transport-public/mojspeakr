@@ -36,12 +36,15 @@ convert_rmd <- function(path,
   #Get a nice table of image references
   img_ref <- generate_image_references(md_file)
 
-  #Lets do a little gsub
-  for (i in 1:nrow(img_ref)) {
-    md_file <- gsub(paste0(img_ref[i, "img_tags"], "<!-- -->"),
-                    paste0(img_ref[i, "govspeak"], "\n"),
-                    md_file,
-                    fixed = TRUE)
+  ##Check there are actually some image references
+  if(!is.null(img_ref)){
+    #Lets do a little gsub
+    for (i in 1:nrow(img_ref)) {
+      md_file <- gsub(paste0(img_ref[i, "img_tags"], "<!-- -->"),
+                      paste0(img_ref[i, "govspeak"], "\n"),
+                      md_file,
+                      fixed = TRUE)
+    }
   }
 
   ##Turn md file into plain text
@@ -76,6 +79,10 @@ convert_rmd <- function(path,
 
   ##Write output as converted file
   write(govspeak_file, gsub("\\.md", "_converted\\.md", path))
+
+  if(file.exists(gsub("\\.md", "_converted\\.md", path))){
+    message("File converted successfully")
+  }
 
   ##If img_wd isn't set to NULL, convert our image tags
   if(!is.null(img_wd)){
