@@ -43,6 +43,10 @@ generate_image_references <- function(lines) {
 
   ##Find the image tags (one per line chaps)
   img_tags <- lines[grep("\\!\\[\\]\\(*.", lines)]
+  ##Stop at this point if there aren't any
+  if(length(img_tags) == 0){
+    message("No images found")
+  } else{
   #Split on the ! symbols
   img_tags <- unlist(strsplit(img_tags, split = "(?<=.)(?=[!])", perl = TRUE))
   ##Drop anything which doesn't then start with ![]
@@ -66,6 +70,7 @@ generate_image_references <- function(lines) {
   data$govspeak <- paste0("!!", row.names(data))
 
   return(data)
+  }
 }
 
 
