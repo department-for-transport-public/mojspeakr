@@ -89,11 +89,11 @@ convert_rmd <- function(path,
     img_ref <- order_img_ref(img_ref = img_ref,
                              img_wd = img_wd)
   }
-
+  if(!is.null(img_ref)){
   ##Write out lil csv of the image path to govspeak lookup
   write.csv(img_ref[, c("img_ref", "govspeak")],
             file = paste0(gsub("(.*[/])*.", "\\1", path), "img_lookup.csv"),
             row.names = FALSE)
-
+  }
 
 }
