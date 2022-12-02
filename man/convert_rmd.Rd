@@ -6,35 +6,38 @@
 \usage{
 convert_rmd(
   path,
-  images_folder = "graphs",
   remove_blocks = FALSE,
   sub_pattern = TRUE,
   page_break = "line",
-  img_type = "all"
+  img_wd = NULL
 )
 }
 \arguments{
 \item{path}{string; filename (including path) to *.md file for conversion}
 
-\item{images_folder}{string; folder containing images for *.md file. Defaults
-to "graphs"}
-
 \item{remove_blocks}{bool; decision to remove block elements from *.md file.
 This includes code blocks and warnings}
 
-\item{sub_pattern}{bool or vector; decision to increase hashed headers by one level in *.md file.
-TRUE will substitute all, FALSE will substitute none, while a vector of the desired substitution levels allows individual headings to be modified as required.
-e.g. "#" will modify only first level headers.}
+\item{sub_pattern}{bool or vector; decision to increase hashed headers by
+one level in *.md file.
+  TRUE will substitute all, FALSE will substitute none, while a vector of
+  the desired substitution levels allows individual headings to be modified
+  as required.
+  e.g. "#" will modify only first level headers.}
 
-\item{page_break}{string; chooses what page breaks are converted to on Whitehall.
-If "line", page breaks are replaced with a horizontal rule. If "none" they are replaced with a line break.
+\item{page_break}{string; chooses what page breaks are converted to on
+Whitehall.
+If "line", page breaks are replaced with a horizontal rule. If "none"
+they are replaced with a line break.
 If "unchanged" they are not removed.}
 
-\item{img_type}{string; select the type of files searched for in the images folder.
-Default is "all", which returns any type of file (including hidden system files).
-Choosing "images" returns standard image types PNG and SVG only.
-Any other string will use regex to return any files with that filetype.}
+\item{img_wd}{path to working directory where images folder is stored.
+In normal usage, this will be the same folder as your markdown file is saved
+in. This can be passed as an absolute or relative path. Providing a path
+will convert your image names into a standardised form, default is NULL
+which does not convert image names.}
 }
 \description{
-Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown format
+Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown
+format
 }

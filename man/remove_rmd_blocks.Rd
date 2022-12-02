@@ -2,7 +2,8 @@
 % Please edit documentation in R/internal_functions.R
 \name{remove_rmd_blocks}
 \alias{remove_rmd_blocks}
-\title{Remove R markdown multiline block elements (package warning and code block)}
+\title{Remove R markdown multiline block elements
+(package warning and code block)}
 \usage{
 remove_rmd_blocks(md_file)
 }
@@ -10,6 +11,7 @@ remove_rmd_blocks(md_file)
 \item{md_file}{string; markdown file text}
 }
 \description{
-Remove R markdown multiline block elements (package warnings, but also multiline code blocks)
+Remove R markdown multiline block elements
+(package warnings, but also multiline code blocks)
 }
 \keyword{internal}

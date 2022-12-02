@@ -9,10 +9,15 @@ add_image(file_name, folder = "graphs")
 \arguments{
 \item{file_name}{string giving the file name of the image only}
 
-\item{folder}{string giving the directory the image is stored in, defaults to "graphs".}
+\item{folder}{string giving the directory the image is stored in,
+defaults to "graphs".}
 }
 \description{
-Add images which are not auto-generated during the knitting process to all publishing formats.
-All images must be of size 960 x 640 pixels to allow upload to the Whitehall publishing system, and must be saved with a filename which starts and ends with sequential numbering.
-For example, if the image will be the third graphic in the final publication, it can be saved as "03-image-1.png".
+Add images which are not auto-generated during the knitting process
+to all publishing formats.
+All images must be of size 960 x 640 pixels to allow upload to the
+Whitehall publishing system, and must be saved with a filename which
+starts and ends with sequential numbering.
+For example, if the image will be the third graphic in the final
+publication, it can be saved as "03-image-1.png".
 }

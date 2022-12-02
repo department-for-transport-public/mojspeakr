@@ -4,14 +4,17 @@
 \alias{hash_sub}
 \title{Increase Rmarkdown headers by one level}
 \usage{
-hash_sub(data, sub_type)
+hash_sub(x, sub_type)
 }
 \arguments{
-\item{data}{object to substitute}
+\item{x}{string object to substitute one # value for another}
 
-\item{sub_type}{logical or vector, TRUE will substitute all heading levels, FALSE will substitute none, alternatively a vector will allow you to select specific levels of vector.}
+\item{sub_type}{logical or vector, TRUE will substitute all heading levels,
+FALSE will substitute none, alternatively a vector will allow you
+to select specific levels of header to substitute.}
 }
 \description{
-Substitute hashed Rmarkdown headers with the next level down down e.g. # to ##
+Substitute hashed Rmarkdown headers with the next level down down
+e.g. # to ##
 }
 \keyword{internal}

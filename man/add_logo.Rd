@@ -11,5 +11,6 @@ add_logo(img)
 }
 \description{
 Add a logo to the top of a HTML pre-release to mimic the appearance of gov.uk
-This should be done for the pre-release only, and not for the final statistics publication
+This should be done for the pre-release only, and not for the final
+statistics publication
 }
