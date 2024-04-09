@@ -11,9 +11,7 @@ Imports:
     knitr
 Suggests:
     testthat (>= 3.0.0),
-    rmarkdown,
-    ggplot2,
-    kableExtra
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1
