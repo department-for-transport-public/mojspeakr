@@ -10,7 +10,6 @@ generate_image_references(lines)
 \item{lines}{raw contents of md file (from readLines)}
 }
 \description{
-Extracts image references from the original markdown output
-creates a lookup between filename and new govdown reference number
+Extracts image references from the original markdown output into Whitehall format
 }
 \keyword{internal}

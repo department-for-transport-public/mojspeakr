@@ -8,8 +8,7 @@ convert_rmd(
   path,
   remove_blocks = FALSE,
   sub_pattern = TRUE,
-  page_break = "line",
-  img_wd = NULL
+  page_break = "line"
 )
 }
 \arguments{
@@ -30,12 +29,6 @@ Whitehall.
 If "line", page breaks are replaced with a horizontal rule. If "none"
 they are replaced with a line break.
 If "unchanged" they are not removed.}
-
-\item{img_wd}{path to working directory where images folder is stored.
-In normal usage, this will be the same folder as your markdown file is saved
-in. This can be passed as an absolute or relative path. Providing a path
-will convert your image names into a standardised form, default is NULL
-which does not convert image names.}
 }
 \description{
 Convert markdown file to Whitehall Publisher (GOV.UK) govspeak markdown
