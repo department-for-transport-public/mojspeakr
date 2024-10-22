@@ -14,12 +14,9 @@ knitr_opts_set <- function(fig.path = "graphs/") {
     cache = FALSE,
     warning = FALSE,
     message = FALSE,
-  # Image size rules for GOV.uk
-    fig.width = 960 / 72,
-    fig.height = 640 / 72,
-    dpi = 72,
   # The default path for mojspeakr::convert_rmd() to check for images
   #is ./graphs
-    fig.path = fig.path
+    fig.path = fig.path,
+  dev = "svg"
   )
 }
